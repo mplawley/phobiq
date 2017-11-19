@@ -1,0 +1,19 @@
+#imageContainer {
+	opacity: 100;
+	-webkit-filter: blur(40px); /* Safari 6.0 - 9.0 */
+    filter: blur(40px);
+}
+
+.imageToBlur {
+	width: 500px;
+	height: 377px;
+}
+
+#blurSlider {
+    width: 450px;
+    height: 10px;
+}
+
+#pageUtils {
+	padding: 8px 2px 8px 2px;
+}
