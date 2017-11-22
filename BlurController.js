@@ -1,4 +1,40 @@
 /* ******************************************************
+ * *********************** FIELDS ***********************
+ * ******************************************************
+*/
+
+var blurControllerStates = function() {
+	blurValueMax: 50,
+	currentBlurValue: 50,
+	unblurStep: 1,
+	numberOfUnblurStepsThisSession: 0,
+
+	initializeCurrentBlurValue: function() {
+		currentBlurValue = blurValueMax;
+	},
+
+	decrementCurrentBlurValue: function(currentBlurValue) {
+		this.currentBlurValue -= currentBlurValue;
+
+		if (this.currentBlurValue < 0) {
+			this.currentBlurValue = 0;
+		}
+	},
+
+	getNumberOfUnblurStepsThisSession: function() {
+		return numberOfUnblurStepsThisSession;
+	},
+
+	setNumberOfUnblurStepsThisSession: function(numberOfUnblurStepsThisSession) {
+		this.numberOfUnblurStepsThisSession = numberOfUnblurStepsThisSession;
+	},
+
+	getUnblurStep: function() {
+		return unblurStep;
+	}
+};
+
+/* ******************************************************
  * *********************** EVENTS ***********************
  * ******************************************************
 */
@@ -6,12 +42,12 @@
 var blurControllerEvents = function() {
 	//On slider input
 	$("#blurSlider").on("input", function() {
-		BlurController.modifyBlurValueViaSlider();
+		blurControllerUtils.modifyBlurValueViaSlider();
 	});
 
 	//On images div click
 	$("#imageContainer").click(function() {
-		BlurController.modifyBlurValueViaClick();
+		blurControllerUtils.modifyBlurValueViaClick();
 	});
 
 	//Prevent click and drag of image from HTML page, 
@@ -22,8 +58,8 @@ var blurControllerEvents = function() {
 
 	//Button click event to download stats
 	$("#downloadButton").click(function() {
-		var numberOfUnblurStepsThisSession = BLUR_VALUE_MAX - currentBlurValue;
-	    BlurController.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
+		var numberOfUnblurStepsThisSession = blurControllerStates.getBlurMax() - blurControllerStates.getCurrentBlurValue();
+	    blurControllerUtils.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
 	});
 }
 
@@ -32,60 +68,33 @@ var blurControllerEvents = function() {
  * ******************************************************
 */
 
-var blurControllerMethods = function() {
-
-}
-
-
-
-	function BlurController() {
-		var blurValueMax = 40; //Be sure to set in two places in CSS and in HTML slider range too
-		var currentBlurValue;
-		var unblurStep = 1;
-		var images;
-		var slider;
-	};
-
-	BlurController.prototype.getBlurMax = function() {
-		return BlurController.blurValueMax;
-	};
-
-	BlurController.prototype.setCurrentBlurValue = function(currentBlurValue) {
-		this.currentBlurValue = currentBlurValue;
+var blurControllerUtils = function() {
+	modifyBlurValueViaSlider: function() {
+		blurControllerStates.setCurrentBlurValue(blurControllerStates.getBlurMax() - $(this).val());
+	    applyBlur(blurControllerStates.getCurrentBlurValue());
 	}
 
-	BlurController.prototype.getCurrentBlurValue = function() {
-		return currentBlurValue;
+	modifyBlurValueViaClick: function() {
+		var proposedNewBlurValue = blurControllerStates.getCurrentBlurValue() - blurControllerStates.getUnblurStep();
+		blurControllerStates.setCurrentBlurValue(proposedNewBlurValue);
+
+		var newBlurValue = blurControllerStates.getCurrentBlurValue();
+		applyBlur(newBlurValue);
+		updateSliderPosition(newBlurValue);
 	}
 
-	BlurController.prototype.modifyBlurValueViaSlider = function() {
-		BlurController.setCurrentBlurValue(BlurController.getBlurMax() - $(this).val());
-	    BlurController.applyBlur(BlurController.getCurrentBlurValue());
-	}
-
-	BlurController.prototype.modifyBlurValueViaClick = function() {
-		currentBlurValue -= unblurStep;
-
-		if (currentBlurValue < 0) {
-			currentBlurValue = 0;
-		}
-
-		applyBlur(currentBlurValue);
-		updateSliderPosition(currentBlurValue);
-	}
-
-	BlurController.prototype.applyBlur = function(currentBlurValue) {
+	applyBlur: function(newBlurValue) {
 		images.css({
-	    	"-webkit-filter": "blur("+currentBlurValue+"px)",
-	        "filter": "blur("+currentBlurValue+"px)"
+	    	"-webkit-filter": "blur("+newBlurValue+"px)",
+	        "filter": "blur("+newBlurValue+"px)"
 		});
 	}
 
-	BlurController.prototype.updateSliderPosition = function(currentBlurValue) {
-		slider[0].value = blurValueMax - currentBlurValue;
+	updateSliderPosition: function(newBlurValue) {
+		$("#blurSlider")[0].value = blurControllerStates.getBlurMax() - newBlurValue;
 	}
 
-	BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
+	saveTextAsFile: function(filename, textToSave) {
 		var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
 	    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
 	    var downloadLink = document.createElement("a");
@@ -96,11 +105,7 @@ var blurControllerMethods = function() {
 	    downloadLink.click();
 	    document.body.removeChild(downloadLink);
 	}
-
-
 }
-
-
 
 /* ******************************************************
  * *********************** INIT ***********************
@@ -108,7 +113,7 @@ var blurControllerMethods = function() {
 */
 
 $(document).ready(function() {
-	BlurController = new BlurController();
-	BlurController.setCurrentBlurValue(BlurController.getBlurMax());
-	events();
+	blurControllerStates();
+	blurControllerEvents();
+	blurControllerUtils();
 });
