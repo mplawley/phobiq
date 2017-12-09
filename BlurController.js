@@ -4,15 +4,18 @@
 */
 
 var blurControllerStates = function() {
+	currentBlurValue: 40,
+	numberOfUnblurStepsThisSession: 1,
 	blurValueMax: 60,
-	currentBlurValue: 50,
 	unblurStep: 1,
-	numberOfUnblurStepsThisSession: 0,
 
 	initializeCurrentBlurValue: function() {
 		currentBlurValue = blurValueMax;
 	},
 
+	newFunction: function(currentStuff) {
+		this.currentStuff = currentStuff;
+	}
 	decrementCurrentBlurValue: function(currentBlurValue) {
 		this.currentBlurValue -= currentBlurValue;
 
