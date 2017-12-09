@@ -4,7 +4,7 @@
 */
 
 var blurControllerStates = function() {
-	blurValueMax: 50,
+	blurValueMax: 60,
 	currentBlurValue: 50,
 	unblurStep: 1,
 	numberOfUnblurStepsThisSession: 0,
