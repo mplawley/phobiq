@@ -9,7 +9,7 @@ BlurController.prototype.images;
 BlurController.prototype.init = function() {
 	this.initializeValues();
 	this.bindUserInterfaceElements();
-	//TODO: set html and css values from script for blurmax and step
+	this.initializeUserInterfaceValues(); //TODO: complete
 }
 
 BlurController.prototype.initializeValues = function() {
@@ -44,6 +44,11 @@ BlurController.prototype.bindUserInterfaceElements = function() {
 	});
 }
 
+BlurController.prototype.initializeUserInterfaceValues = function() {
+	blurSlider.max = this.getMaxBlur();
+	blurSlider.step = this.getBlurStep();
+}
+
 BlurController.prototype.unblur = function() {
 	currentBlur -= blurStep;
 	if (currentBlur < 0) {
@@ -73,7 +78,7 @@ BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
 }
 
 BlurController.prototype.updateSliderPosition = function() {
-	blurSlider.value = this.getCurrentBlur();
+	blurSlider[0].value = this.getMaxBlur() - this.getCurrentBlur();
 }
 
 BlurController.prototype.getMaxBlur = function() {
