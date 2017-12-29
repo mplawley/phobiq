@@ -8,6 +8,30 @@ describe("Test BlurController logic", function() {
     blurController.initializeUserInterfaceValues();
   });
 
+  it("should call initialization methods", function() {
+    var spyOnImageEvent = spyOn(blurController, "initializeValues");
+    var spyOnImageEvent = spyOn(blurController, "bindUserInterfaceElements");
+    var spyOnImageEvent = spyOn(blurController, "initializeUserInterfaceValues");
+
+    blurController.init();
+
+    expect(blurController.initializeValues).toHaveBeenCalled();
+    expect(blurController.bindUserInterfaceElements).toHaveBeenCalled();
+    expect(blurController.initializeUserInterfaceValues).toHaveBeenCalled();
+  });
+
+  it("should initialize default blur values", function() {
+    var spyOnImageEvent = spyOn(blurController, "setMaxBlur");
+    var spyOnImageEvent = spyOn(blurController, "setCurrentBlur");
+    var spyOnImageEvent = spyOn(blurController, "setBlurStep");
+    
+    blurController.initializeValues();
+
+    expect(blurController.setMaxBlur).toHaveBeenCalled();
+    expect(blurController.setCurrentBlur).toHaveBeenCalled();
+    expect(blurController.setBlurStep).toHaveBeenCalled();
+  });
+
   it("should be able to initialize BlurController values", function() {
     var expectedMaxBlur = 100;
     var expectedCurrentBlur = 100;

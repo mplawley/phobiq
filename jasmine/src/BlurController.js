@@ -10,13 +10,13 @@ BlurController.prototype.downloadButton;
 BlurController.prototype.init = function() {
 	this.initializeValues();
 	this.bindUserInterfaceElements();
-	this.initializeUserInterfaceValues(); //TODO: complete
+	this.initializeUserInterfaceValues();
 }
 
 BlurController.prototype.initializeValues = function() {
-	maxBlur = 100;
-	currentBlur = 100;
-	blurStep = 1;
+	this.setMaxBlur(100);
+	this.setCurrentBlur(100);
+	this.setBlurStep(1);
 }
 
 BlurController.prototype.bindUserInterfaceElements = function() {
@@ -99,6 +99,10 @@ BlurController.prototype.getMaxBlur = function() {
 	return maxBlur;
 }
 
+BlurController.prototype.setMaxBlur = function(newMaxBlur) {
+	maxBlur = newMaxBlur;
+}
+
 BlurController.prototype.getCurrentBlur = function() {
 	return currentBlur;
 }
@@ -109,4 +113,8 @@ BlurController.prototype.setCurrentBlur = function(newCurrentBlur) {
 
 BlurController.prototype.getBlurStep = function() {
 	return blurStep;
+}
+
+BlurController.prototype.setBlurStep = function(newBlurStepValue) {
+	blurStep = newBlurStepValue;
 }
