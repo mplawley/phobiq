@@ -1,4 +1,4 @@
-describe("Test BlurController functionality", function() {
+describe("Test BlurController logic", function() {
   var blurController;
 
   beforeEach(function() {
@@ -33,25 +33,47 @@ describe("Test BlurController functionality", function() {
     blurController.setCurrentBlur(45);
     expect(45).toEqual(blurController.getCurrentBlur());
   });
+});
 
-  it("should ensure that unblur() is called", function() {
-    spyOn(blurController, "unblur");
-    blurController.unblur(); 
-    expect(blurController.unblur).toHaveBeenCalled();
+describe("Test BlurController UI interactions", function() {
+  var blurController;
+
+  beforeEach(function() {
+    blurController = new BlurController();
+    blurController.initializeValues();
+    blurController.bindUserInterfaceElements();
+    blurController.initializeUserInterfaceValues();
   });
 
-  //TODO: update after downloading jquery-jasmine
-  // it("should have an interactive image container", function() {
-  //   var spyOnImageEvent = spyOn(blurController, "unblur");
-  //   $("#images").trigger("click");
-  //   expect(blurController.unblur).toHaveBeenCalled();
-  //   ($("#images"));
-  //   expect(clickImagesEvent).toHaveBeenTriggered();
-  //   expect(99).toEqual(blurController.getCurrentBlur());
-  //   var eventSpy = spyOnEvent('#imageContainer', 'click');
-  //   $('#imageContainer').trigger('click');
-  //   expect('click').toHaveBeenTriggeredOn('#imageContainer');
-  //   expect(eventSpy).toHaveBeenTriggered();
-  //   pending();
-  // });
+  it("should allow blur slider to call unblur methods", function() {
+    var spyOnImageEvent = spyOn(blurController, "setCurrentBlur");
+    var spyOnImageEvent = spyOn(blurController, "applyCurrentBlur");
+
+    blurController.handleBlurSliderInput();
+
+    expect(blurController.setCurrentBlur).toHaveBeenCalled();
+    expect(blurController.applyCurrentBlur).toHaveBeenCalled();
+  });
+
+  it("should allow image click events to call unblur methods", function() {
+    var spyOnImageEvent = spyOn(blurController, "unblur");
+    var spyOnImageEvent = spyOn(blurController, "updateSliderPosition");
+
+    blurController.handleImageClick();
+
+    expect(blurController.unblur).toHaveBeenCalled();
+    expect(blurController.updateSliderPosition).toHaveBeenCalled();
+  });
+
+  it("should allow a download button to initiate data download", function() {
+    var spyOnImageEvent = spyOn(blurController, "saveTextAsFile");
+    var spyOnImageEvent = spyOn(blurController, "getMaxBlur");
+    var spyOnImageEvent = spyOn(blurController, "getCurrentBlur");
+
+    blurController.handleDownloadButtonClick();
+
+    expect(blurController.saveTextAsFile).toHaveBeenCalled();
+    expect(blurController.getMaxBlur).toHaveBeenCalled();
+    expect(blurController.getCurrentBlur).toHaveBeenCalled();
+  });
 });

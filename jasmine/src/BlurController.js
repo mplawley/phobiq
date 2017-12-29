@@ -5,6 +5,7 @@ BlurController.prototype.currentBlur;
 BlurController.prototype.blurStep;
 BlurController.prototype.blurSlider;
 BlurController.prototype.images;
+BlurController.prototype.downloadButton;
 
 BlurController.prototype.init = function() {
 	this.initializeValues();
@@ -19,28 +20,26 @@ BlurController.prototype.initializeValues = function() {
 }
 
 BlurController.prototype.bindUserInterfaceElements = function() {
-	var me = this;
+	var _this = this;
 	blurSlider = $("#blurSlider");
 	images = $("#imageContainer");
+	downloadButton = $('#downloadButton');
 
 	blurSlider.on("input", function() {
-		me.setCurrentBlur(me.getMaxBlur() - blurSlider.val());
-		me.applyCurrentBlur();
+		_this.handleBlurSliderInput();
 	});
 
 	images.click(function() {
-		me.unblur();
-		me.updateSliderPosition();
+		_this.handleImageClick();
+	});
+
+	downloadButton.click(function() {
+		_this.handleDownloadButtonClick();
 	});
 
 	//Prevent stray click-and-drags from revealing the image
 	images.on('dragstart', function(event) {
 		event.preventDefault();
-	});
-
-	$('#downloadButton').click(function() {
-		var numberOfUnblurStepsThisSession = me.getMaxBlur() - me.getCurrentBlur();
-	    me.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
 	});
 }
 
@@ -58,11 +57,26 @@ BlurController.prototype.unblur = function() {
 }
 
 BlurController.prototype.applyCurrentBlur = function() {
-	var me = this;
+	var _this = this;
 	images.css({
-    	"-webkit-filter": "blur("+me.getCurrentBlur()+"px)",
-        "filter": "blur("+me.getCurrentBlur()+"px)"
+    	"-webkit-filter": "blur("+_this.getCurrentBlur()+"px)",
+        "filter": "blur("+_this.getCurrentBlur()+"px)"
 	});
+}
+
+BlurController.prototype.handleBlurSliderInput = function() {
+	this.setCurrentBlur(this.getMaxBlur() - blurSlider.val());
+	this.applyCurrentBlur();
+}
+
+BlurController.prototype.handleImageClick = function() {
+	this.unblur();
+	this.updateSliderPosition();
+}
+
+BlurController.prototype.handleDownloadButtonClick = function() {
+	var numberOfUnblurStepsThisSession = this.getMaxBlur() - this.getCurrentBlur();
+    this.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
 }
 
 BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
