@@ -1,7 +1,7 @@
-/* ******************************************************
- * *********************** FIELDS ***********************
- * ******************************************************
-*/
+BlurController = function() {};
+
+BlurController.prototype.maxBlur;
+
 
 var blurControllerStates = function() {
 	blurValueMax: 60,
