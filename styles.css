@@ -1,7 +1,7 @@
 #imageContainer {
 	opacity: 100;
-	-webkit-filter: blur(40px); /* Safari 6.0 - 9.0 */
-    filter: blur(40px);
+	-webkit-filter: blur(100px); /* Safari 6.0 - 9.0 */
+    filter: blur(100px);
 }
 
 .imageToBlur {

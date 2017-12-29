@@ -6,6 +6,12 @@ BlurController.prototype.blurStep;
 BlurController.prototype.blurSlider;
 BlurController.prototype.images;
 
+BlurController.prototype.init = function() {
+	this.initializeValues();
+	this.bindUserInterfaceElements();
+	//TODO: set html and css values from script for blurmax and step
+}
+
 BlurController.prototype.initializeValues = function() {
 	maxBlur = 100;
 	currentBlur = 100;
@@ -13,26 +19,28 @@ BlurController.prototype.initializeValues = function() {
 }
 
 BlurController.prototype.bindUserInterfaceElements = function() {
-	slider = $("#imageSlider");
+	var me = this;
+	blurSlider = $("#blurSlider");
 	images = $("#imageContainer");
 
-	slider.on("input", function() {
-		unblur();
+	blurSlider.on("input", function() {
+		me.setCurrentBlur(me.getMaxBlur() - blurSlider.val());
+		me.applyCurrentBlur();
 	});
 
 	images.click(function() {
-		unblur();
-		updateSliderPosition();
+		me.unblur();
+		me.updateSliderPosition();
 	});
 
 	//Prevent stray click-and-drags from revealing the image
-	images.on('dragstart', function(event) { 
+	images.on('dragstart', function(event) {
 		event.preventDefault();
 	});
 
 	$('#downloadButton').click(function() {
-		var numberOfUnblurStepsThisSession = getMaxBlur() - getCurrentBlur();
-	    saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
+		var numberOfUnblurStepsThisSession = me.getMaxBlur() - me.getCurrentBlur();
+	    me.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
 	});
 }
 
@@ -41,13 +49,14 @@ BlurController.prototype.unblur = function() {
 	if (currentBlur < 0) {
 		currentBlur = 0;
 	}
-	applyBlur(currentBlur);
+	this.applyCurrentBlur();
 }
 
-BlurController.prototype.applyBlur = function() {
+BlurController.prototype.applyCurrentBlur = function() {
+	var me = this;
 	images.css({
-    	"-webkit-filter": "blur("+currentBlurValue+"px)",
-        "filter": "blur("+currentBlurValue+"px)"
+    	"-webkit-filter": "blur("+me.getCurrentBlur()+"px)",
+        "filter": "blur("+me.getCurrentBlur()+"px)"
 	});
 }
 
@@ -64,7 +73,7 @@ BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
 }
 
 BlurController.prototype.updateSliderPosition = function() {
-	slider[0].value = getCurrentBlur();
+	blurSlider.value = this.getCurrentBlur();
 }
 
 BlurController.prototype.getMaxBlur = function() {
@@ -75,9 +84,10 @@ BlurController.prototype.getCurrentBlur = function() {
 	return currentBlur;
 }
 
+BlurController.prototype.setCurrentBlur = function(newCurrentBlur) {
+	currentBlur = newCurrentBlur;
+}
+
 BlurController.prototype.getBlurStep = function() {
 	return blurStep;
 }
-
-
-
