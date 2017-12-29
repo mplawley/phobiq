@@ -1,16 +1,17 @@
 describe("Test blur decrement", function() {
-  var BlurController;
+  var blurController;
 
   beforeEach(function() {
-      BlurController = new BlurController();
+    blurController = new BlurController(); 
+    blurController.initializeValues();
   });
 
 	it("should be able to decrement currentBlur by blurStep", function() {	
-		var actualMaxBlur = BlurController.getMaxBlur();
-    var actualCurrentBlur = BlurController.getCurrentBlur();
-    var actualBlurStep = BlurController.getBlurStep();
+		var actualMaxBlur = blurController.getMaxBlur();
+    var actualCurrentBlur = blurController.getCurrentBlur();
+    var actualBlurStep = blurController.getBlurStep();
 
-    BlurController.unblur();
+    blurController.unblur();
 
     var expectedValue = actualCurrentBlur - actualBlurStep;
     expect(expectedValue).toEqual(blurController.getCurrentBlur());
