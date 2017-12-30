@@ -9,9 +9,9 @@ describe("Test BlurController logic", function() {
   });
 
   it("should call initialization methods", function() {
-    var spyOnImageEvent = spyOn(blurController, "initializeValues");
-    var spyOnImageEvent = spyOn(blurController, "bindUserInterfaceElements");
-    var spyOnImageEvent = spyOn(blurController, "initializeUserInterfaceValues");
+    spyOn(blurController, "initializeValues");
+    spyOn(blurController, "bindUserInterfaceElements");
+    spyOn(blurController, "initializeUserInterfaceValues");
 
     blurController.init();
 
@@ -21,9 +21,9 @@ describe("Test BlurController logic", function() {
   });
 
   it("should initialize default blur values", function() {
-    var spyOnImageEvent = spyOn(blurController, "setMaxBlur");
-    var spyOnImageEvent = spyOn(blurController, "setCurrentBlur");
-    var spyOnImageEvent = spyOn(blurController, "setBlurStep");
+    spyOn(blurController, "setMaxBlur");
+    spyOn(blurController, "setCurrentBlur");
+    spyOn(blurController, "setBlurStep");
     
     blurController.initializeValues();
 
@@ -70,8 +70,8 @@ describe("Test BlurController UI interactions", function() {
   });
 
   it("should allow blur slider to call unblur methods", function() {
-    var spyOnImageEvent = spyOn(blurController, "setCurrentBlur");
-    var spyOnImageEvent = spyOn(blurController, "applyCurrentBlur");
+    spyOn(blurController, "setCurrentBlur");
+    spyOn(blurController, "applyCurrentBlur");
 
     blurController.handleBlurSliderInput();
 
@@ -80,8 +80,8 @@ describe("Test BlurController UI interactions", function() {
   });
 
   it("should allow image click events to call unblur methods", function() {
-    var spyOnImageEvent = spyOn(blurController, "unblur");
-    var spyOnImageEvent = spyOn(blurController, "updateSliderPosition");
+    spyOn(blurController, "unblur");
+    spyOn(blurController, "updateSliderPosition");
 
     blurController.handleImageClick();
 
@@ -90,14 +90,35 @@ describe("Test BlurController UI interactions", function() {
   });
 
   it("should allow a download button to initiate data download", function() {
-    var spyOnImageEvent = spyOn(blurController, "saveTextAsFile");
-    var spyOnImageEvent = spyOn(blurController, "getMaxBlur");
-    var spyOnImageEvent = spyOn(blurController, "getCurrentBlur");
+    spyOn(blurController, "saveTextAsFile");
+    spyOn(blurController, "getMaxBlur");
+    spyOn(blurController, "getCurrentBlur");
 
     blurController.handleDownloadButtonClick();
 
     expect(blurController.saveTextAsFile).toHaveBeenCalled();
     expect(blurController.getMaxBlur).toHaveBeenCalled();
     expect(blurController.getCurrentBlur).toHaveBeenCalled();
+  });
+});
+
+describe("UI views", function() {
+  var blurController;
+
+  beforeEach(function() {
+    blurController = new BlurController();
+    blurController.initializeValues();
+    blurController.bindUserInterfaceElements();
+    blurController.initializeUserInterfaceValues();
+  });
+
+  it("should update the UI with the user's click progress", function() {  
+    spyOn(blurController, "getCurrentBlur");
+    spyOn(blurController, "getMaxBlur");
+
+    blurController.updateUserClickProgress();
+    
+    expect(blurController.getCurrentBlur).toHaveBeenCalled();
+    expect(blurController.getMaxBlur).toHaveBeenCalled();
   });
 });
