@@ -6,6 +6,7 @@ BlurController.prototype.blurStep;
 BlurController.prototype.blurSlider;
 BlurController.prototype.images;
 BlurController.prototype.downloadButton;
+BlurController.prototype.userProgressText;
 
 BlurController.prototype.init = function() {
 	this.initializeValues();
@@ -23,7 +24,8 @@ BlurController.prototype.bindUserInterfaceElements = function() {
 	var _this = this;
 	blurSlider = $("#blurSlider");
 	images = $("#imageContainer");
-	downloadButton = $('#downloadButton');
+	downloadButton = $("#downloadButton");
+	userProgressText = $("#userProgressText");
 
 	blurSlider.on("input", function() {
 		_this.handleBlurSliderInput();
@@ -67,11 +69,13 @@ BlurController.prototype.applyCurrentBlur = function() {
 BlurController.prototype.handleBlurSliderInput = function() {
 	this.setCurrentBlur(this.getMaxBlur() - blurSlider.val());
 	this.applyCurrentBlur();
+	this.updateUserClickProgress();
 }
 
 BlurController.prototype.handleImageClick = function() {
 	this.unblur();
 	this.updateSliderPosition();
+	this.updateUserClickProgress();
 }
 
 BlurController.prototype.handleDownloadButtonClick = function() {
@@ -93,6 +97,15 @@ BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
 
 BlurController.prototype.updateSliderPosition = function() {
 	blurSlider[0].value = this.getMaxBlur() - this.getCurrentBlur();
+}
+
+BlurController.prototype.updateUserClickProgress = function() {
+	var resultPercentage = this.calculateRoundedPercentage(this.getMaxBlur() - this.getCurrentBlur(), this.getMaxBlur());
+	userProgressText.html(resultPercentage + "\%");
+}
+
+BlurController.prototype.calculateRoundedPercentage = function(numerator, denominator) {
+	return Math.round((numerator / denominator) * 100);
 }
 
 BlurController.prototype.getMaxBlur = function() {
