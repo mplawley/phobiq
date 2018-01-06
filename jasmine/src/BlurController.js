@@ -100,8 +100,12 @@ BlurController.prototype.updateSliderPosition = function() {
 }
 
 BlurController.prototype.updateUserClickProgress = function() {
-	var resultPercentage = Math.round(((this.getMaxBlur() - this.getCurrentBlur()) / this.getMaxBlur()) * 100);
+	var resultPercentage = this.calculateRoundedPercentage(this.getMaxBlur() - this.getCurrentBlur(), this.getMaxBlur());
 	userProgressText.html(resultPercentage + "\%");
+}
+
+BlurController.prototype.calculateRoundedPercentage = function(numerator, denominator) {
+	return Math.round((numerator / denominator) * 100);
 }
 
 BlurController.prototype.getMaxBlur = function() {
