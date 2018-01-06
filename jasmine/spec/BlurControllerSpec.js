@@ -16,6 +16,10 @@ describe("Test BlurController logic", function() {
     expect(blurController.initializeValues).toHaveBeenCalled();
     expect(blurController.bindUserInterfaceElements).toHaveBeenCalled();
     expect(blurController.initializeUserInterfaceValues).toHaveBeenCalled();
+
+    expect(blurController.initializeValues.calls.count()).toEqual(1);
+    expect(blurController.bindUserInterfaceElements.calls.count()).toEqual(1);
+    expect(blurController.initializeUserInterfaceValues.calls.count()).toEqual(1);
   });
   
   it("should allow init() to bind UI elements to object values via jQuery selectors", function() {
