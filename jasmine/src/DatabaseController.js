@@ -11,20 +11,20 @@ DatabaseController.prototype.sendDataToAjaxCall = function (numberOfUnblurStepsT
 	request = $.ajax({
 	    url: this.developmentURL,
 	    type: 'POST',
-	    data: numberOfUnblurStepsThisSession.toString()
+	    data: numberOfUnblurStepsThisSession
 	});
 
 	request.done(function (response, textStatus, jqXHR) {
-		console.log("Request is done");
+		console.log("Request is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
 		console.error("The following error occurred: " +
-						textStatus, errorThrown
+						textStatus, errorThrown, jqXHR + " and that's all"
 					 );
 	});
 
 	request.always(function () {
 		console.log("I'm always called :) ");
-	})
+	});
 }
