@@ -7,11 +7,13 @@ BlurController.prototype.blurSlider;
 BlurController.prototype.images;
 BlurController.prototype.downloadButton;
 BlurController.prototype.userProgressText;
+BlurController.prototype.databaseController;
 
 BlurController.prototype.init = function() {
 	this.initializeValues();
 	this.bindUserInterfaceElements();
 	this.initializeUserInterfaceValues();
+	this.databaseController = new DatabaseController();
 }
 
 BlurController.prototype.initializeValues = function() {
@@ -81,6 +83,7 @@ BlurController.prototype.handleImageClick = function() {
 BlurController.prototype.handleDownloadButtonClick = function() {
 	var numberOfUnblurStepsThisSession = this.getMaxBlur() - this.getCurrentBlur();
     this.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
+    this.databaseController.sendDataToAjaxCall(numberOfUnblurStepsThisSession);
 }
 
 BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
