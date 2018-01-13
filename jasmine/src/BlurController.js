@@ -39,6 +39,7 @@ BlurController.prototype.bindUserInterfaceElements = function() {
 
 	downloadButton.click(function() {
 		_this.handleDownloadButtonClick();
+		_this.persistToDatabase();
 	});
 
 	//Prevent stray click-and-drags from revealing the image
@@ -81,9 +82,11 @@ BlurController.prototype.handleImageClick = function() {
 }
 
 BlurController.prototype.handleDownloadButtonClick = function() {
-	var numberOfUnblurStepsThisSession = this.getMaxBlur() - this.getCurrentBlur();
-    this.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
-    this.databaseController.sendDataToAjaxCall(numberOfUnblurStepsThisSession);
+    this.saveTextAsFile("Phobiq stats", this.getBlurStepsTaken());
+}
+
+BlurController.prototype.persistToDatabase = function() {
+	this.databaseController.sendDataToAjaxCall(this);
 }
 
 BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
@@ -99,11 +102,11 @@ BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
 }
 
 BlurController.prototype.updateSliderPosition = function() {
-	blurSlider[0].value = this.getMaxBlur() - this.getCurrentBlur();
+	blurSlider[0].value = this.getBlurStepsTaken();
 }
 
 BlurController.prototype.updateUserClickProgress = function() {
-	var resultPercentage = this.calculateRoundedPercentage(this.getMaxBlur() - this.getCurrentBlur(), this.getMaxBlur());
+	var resultPercentage = this.calculateRoundedPercentage(this.getBlurStepsTaken(), this.getMaxBlur());
 	userProgressText.html(resultPercentage + "\%");
 }
 
@@ -133,4 +136,8 @@ BlurController.prototype.getBlurStep = function() {
 
 BlurController.prototype.setBlurStep = function(newBlurStepValue) {
 	blurStep = newBlurStepValue;
+}
+
+BlurController.prototype.getBlurStepsTaken = function() {
+	return this.getMaxBlur() - this.getCurrentBlur();
 }
