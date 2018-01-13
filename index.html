@@ -6,34 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
   	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="login-styles.css">
     
   	<script src="jquery-3.2.1.min.js"></script>
-    <script src="jasmine/src/DatabaseController.js"></script>
-  	<script src="jasmine/src/BlurController.js"></script>
-    <script src="jasmine/src/Main.js"></script>
+    <script src="jasmine/src/LoginController.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <title>Phobiq</title>
   </head>
 
   <body>
-  	<h1 id="mainHeader">Phobiq</h1>
+  	<h1 id="loginHeader">Phobiq login</h1>
 
-		<div id="imageContainer">
-			<img class="imageToBlur" src="images/bloodImage.png"/>
-      <img class="imageToBlur" src="images/cockroach.jpg"/>
-		</div>
-
-		<p id="instructions">Click above or move the slider to change the blur.</p>
-
-		<div id="sliders">
-	 		<input id="blurSlider" type="range" value="0" max="100" min="0" step="1"/>
-      <p id="userProgressText">0%</p>
-		</div>
-
-    <div id="pageUtils">
-      <button id="downloadButton" type="button">Download stats</button>
-    </div>
-  </body>
-
+    <form class="login-form">
+      <p class="login-text">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-lock fa-stack-1x"></i>
+        </span>
+      </p>
+      <input type="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
+      <input type="password" class="login-password" required="true" placeholder="Password" />
+      <input id="login-button" type="submit" name="Login" value="Login" class="login-submit" />
+    </form>
+  
+    <a href="#" class="login-forgot-pass">forgot password?</a>
+    <div class="underlay-photo"></div>
+    <div class="underlay-black"></div> 
 </html>
