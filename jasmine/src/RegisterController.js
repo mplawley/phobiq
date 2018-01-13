@@ -12,7 +12,6 @@ RegisterController.prototype.linkUserInterfacetoFunctionality = function() {
 	_this = this;
 
 	$("#register-form").submit(function(event) {
-		console.log("register form!");
 		_this.handleRegistrationCompletion();
 		_this.deactivateLoginForm();
 	});
@@ -27,7 +26,8 @@ RegisterController.prototype.handleRegistrationCompletion = function () {
 	    url: this.developmentRegisterURL,
 	    type: 'POST',
 	    data: { username : this.retrieveSubmittedUserNameFromDOM(),
-	    		password : this.retrieveSubmittedPasswordFromDOM() }
+	    		password : this.retrieveSubmittedPasswordFromDOM(),
+	    		confirmed_password: this.retrieveSubmittedConfirmedPasswordFromDOM() }
 	});
 
 	request.done(function (response, textStatus, jqXHR) {
@@ -61,6 +61,11 @@ RegisterController.prototype.retrieveSubmittedUserNameFromDOM = function() {
 RegisterController.prototype.retrieveSubmittedPasswordFromDOM = function() {
 	return $("#password").val();
 }
+
+RegisterController.prototype.retrieveSubmittedConfirmedPasswordFromDOM = function() {
+	return $("#confirmed-password").val();
+}
+
 
 RegisterController.prototype.deactivateLoginForm = function() {
 	$("#username").attr('disabled', 'disabled');
