@@ -13,19 +13,12 @@ LoginController.prototype.initializeStates = function() {
 	this.setNumberOfLoginAttempts(0);
 }
 
-LoginController.prototype.retrieveSubmittedUserNameFromDOM = function() {
-	return $("#username").value;
-}
-
-LoginController.prototype.retrieveSubmittedPasswordFromDOM = function() {
-	return $("#password").value;
-}
-
 LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 	_this = this;
 
 	$('#login-button').click(function() {
 		_this.handleLoginAttempt();
+		_this.deactivateLoginForm();
 	});
 }
 
@@ -51,8 +44,6 @@ LoginController.prototype.handleLoginAttempt = function () {
 	});
 
 	request.done(function (response, textStatus, jqXHR) {
-		console.log("\nRequest is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
-		_this.handleLoginSuccess();
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -62,7 +53,6 @@ LoginController.prototype.handleLoginAttempt = function () {
 	});
 
 	request.always(function () {
-		
 	});
 }
 
@@ -74,8 +64,6 @@ LoginController.prototype.incrementNumberOfLoginAttempts = function() {
 	this.numberOfLoginAttempts += 1;
 }
 
-LoginController.prototype.setNumberOfLoginAttempts = function(numberOfLoginAttempts) {
-	this.numberOfLoginAttempts = numberOfLoginAttempts;
 }
 
 $(document).ready(function() {
