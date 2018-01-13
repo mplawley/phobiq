@@ -9,6 +9,7 @@ LoginController.prototype.linkLoginButtonToBlurPage = function() {
 }
 
 LoginController.prototype.handleLoginClick = function() {
+	//Validate input
 	window.location='blur.html';
 }
 
