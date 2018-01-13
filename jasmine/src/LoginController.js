@@ -25,17 +25,19 @@ LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 LoginController.prototype.handleLoginAttempt = function () {
 	_this = this;
 
-	this.incrementNumberOfLoginAttempts();
-
 	if (this.numberOfLoginAttempts > 10) {
 		console.log("Too many login attempts");
+		return;
+	}
+
+	if (!this.formIsValid()) {
 		return;
 	}
 
 	if (this.request) {
 		this.request.abort();
 	}
-
+	
 	request = $.ajax({
 	    url: this.developmentLoginURL,
 	    type: 'POST',
@@ -44,6 +46,7 @@ LoginController.prototype.handleLoginAttempt = function () {
 	});
 
 	request.done(function (response, textStatus, jqXHR) {
+		console.log("Request is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -53,7 +56,17 @@ LoginController.prototype.handleLoginAttempt = function () {
 	});
 
 	request.always(function () {
+		_this.incrementNumberOfLoginAttempts();
 	});
+}
+
+LoginController.prototype.formIsValid = function() {
+	if (!this.retrieveSubmittedUserNameFromDOM() || !this.retrieveSubmittedPasswordFromDOM()) {
+		console.log("form failed validation");
+		return false;
+	} else {
+		return true;
+	}
 }
 
 LoginController.prototype.handleLoginSuccess = function() {
@@ -64,6 +77,21 @@ LoginController.prototype.incrementNumberOfLoginAttempts = function() {
 	this.numberOfLoginAttempts += 1;
 }
 
+LoginController.prototype.setNumberOfLoginAttempts = function(newNumberOfLoginAttempts) {
+	this.numberOfLoginAttempts = newNumberOfLoginAttempts;
+}
+
+LoginController.prototype.retrieveSubmittedUserNameFromDOM = function() {
+	return $("#username").val();
+}
+
+LoginController.prototype.retrieveSubmittedPasswordFromDOM = function() {
+	return $("#password").val();
+}
+
+LoginController.prototype.deactivateLoginForm = function() {
+	$("#username").attr('disabled', 'disabled');
+	$("#password").attr('disabled', 'disabled');
 }
 
 $(document).ready(function() {
