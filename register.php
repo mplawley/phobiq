@@ -94,7 +94,8 @@
                 // Attempt to execute the prepared statement
                 if($stmt->execute()) {
                     // Redirect to login page
-                    header("location: index.html");
+                    header("Location:index.html");
+                    exit();
                 } else {
                     echo "Something went wrong. Please try again later.";
                 }

@@ -17,13 +17,9 @@ LoginController.prototype.initializeStates = function() {
 LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 	_this = this;
 
-	$('#login-button').click(function() {
+	$('#main-login-form').submit(function(event) {
+		event.preventDefault();
 		_this.handleLoginAttempt();
-		_this.deactivateLoginForm();
-	});
-
-	$('#register-button').click(function() {
-		_this.handleRegisterAttempt();
 		_this.deactivateLoginForm();
 	});
 }
