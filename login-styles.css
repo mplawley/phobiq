@@ -80,7 +80,7 @@ input {
   color: white;
   cursor: pointer;
   display: block;
-  font-size: 75%;
+  font-size: 100%;
   left: 0;
   opacity: 0.6;
   padding: .5rem;
@@ -92,6 +92,7 @@ input {
     opacity: 1;
   }
 }
+
 .login-submit {
   border: 1px solid white;
   background: transparent;
@@ -129,6 +130,12 @@ input {
 
 #loginHeader {
   color: white;
+}
+
+#registerLink {
+  color: white;
+  font-size: 100%;
+  text-decoration: underline;
 }
 
 .wrapper {

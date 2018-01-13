@@ -3,6 +3,7 @@ LoginController = function() {};
 LoginController.prototype.numberOfLoginAttempts;
 LoginController.prototype.request;
 LoginController.prototype.developmentLoginURL = "http://localhost:8888/login.php";
+LoginController.prototype.registerPathToHTML = 'register.html';
 
 LoginController.prototype.init = function() {
 	this.initializeStates();
@@ -18,6 +19,11 @@ LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 
 	$('#login-button').click(function() {
 		_this.handleLoginAttempt();
+		_this.deactivateLoginForm();
+	});
+
+	$('#register-button').click(function() {
+		_this.handleRegisterAttempt();
 		_this.deactivateLoginForm();
 	});
 }
@@ -60,6 +66,10 @@ LoginController.prototype.handleLoginAttempt = function () {
 	});
 }
 
+LoginController.prototype.handleRegisterAttempt = function() {
+	
+}
+
 LoginController.prototype.formIsValid = function() {
 	if (!this.retrieveSubmittedUserNameFromDOM() || !this.retrieveSubmittedPasswordFromDOM()) {
 		console.log("form failed validation");
@@ -67,10 +77,6 @@ LoginController.prototype.formIsValid = function() {
 	} else {
 		return true;
 	}
-}
-
-LoginController.prototype.handleLoginSuccess = function() {
-	window.location='blur.html';
 }
 
 LoginController.prototype.incrementNumberOfLoginAttempts = function() {
