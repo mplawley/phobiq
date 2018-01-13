@@ -131,6 +131,11 @@ input {
   color: white;
 }
 
+.wrapper {
+  width: 350px;
+  padding: 20px;
+}
+
 @keyframes hue-rotate {
   from {
     -webkit-filter: grayscale(30%) hue-rotate(0deg);

@@ -86,7 +86,7 @@ BlurController.prototype.handleDownloadButtonClick = function() {
 }
 
 BlurController.prototype.persistToDatabase = function() {
-	this.databaseController.sendDataToAjaxCall(this);
+	this.databaseController.sendDataWithAjaxCall(this);
 }
 
 BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
