@@ -49,7 +49,7 @@
                                 save the username to the session */
                                 session_start();
                                 $_SESSION['username'] = $username;
-                                header("Location:login.php");
+                                //header("Location:login.php");
                             } else {
                                 // Display an error message if password is not valid
                                 $password_err = 'The password you entered was not valid.';
@@ -93,7 +93,7 @@
     <body>
         <h1 id="mainHeader">Phobiq</h1>
         <div class="page-header">
-            <h1>Hi, <b><?php echo $_SESSION['username']; ?></b>. Welcome to our site.</h1>
+            <h1>Hi, <b><?php echo $loggedOnUser; ?></b>. Welcome to our site.</h1>
         </div>
             <p><a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>
 

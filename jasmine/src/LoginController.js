@@ -20,7 +20,6 @@ LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 	$('#main-login-form').submit(function(event) {
 		event.preventDefault();
 		_this.handleLoginAttempt();
-		_this.deactivateLoginForm();
 	});
 }
 
@@ -49,6 +48,10 @@ LoginController.prototype.handleLoginAttempt = function () {
 
 	request.done(function (response, textStatus, jqXHR) {
 		console.log("Request is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
+		//Hack to include MAMP compatibility without relying on ob.flush in PHP
+		if (response.toString().includes("<!DOCTYPE html>")) {
+			window.location = "/login.php";
+		}
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
@@ -60,10 +63,6 @@ LoginController.prototype.handleLoginAttempt = function () {
 	request.always(function () {
 		_this.incrementNumberOfLoginAttempts();
 	});
-}
-
-LoginController.prototype.handleRegisterAttempt = function() {
-	
 }
 
 LoginController.prototype.formIsValid = function() {
@@ -89,11 +88,6 @@ LoginController.prototype.retrieveSubmittedUserNameFromDOM = function() {
 
 LoginController.prototype.retrieveSubmittedPasswordFromDOM = function() {
 	return $("#password").val();
-}
-
-LoginController.prototype.deactivateLoginForm = function() {
-	$("#username").attr('disabled', 'disabled');
-	$("#password").attr('disabled', 'disabled');
 }
 
 $(document).ready(function() {
