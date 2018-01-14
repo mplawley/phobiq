@@ -94,7 +94,7 @@
                 // Attempt to execute the prepared statement
                 if($stmt->execute()) {
                     // Redirect to login page
-                    header("Location:index.html");
+                    header("Location:login.php");
                     exit();
                 } else {
                     echo "Something went wrong. Please try again later.";
@@ -114,3 +114,48 @@
     console_log($password_err);
     console_log($confirm_password_err);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="login-styles.css">
+    
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="jasmine/src/RegisterController.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <title>Phobiq</title>
+  </head>
+
+  <body>
+
+    <div class="wrapper">
+        <h2>Sign Up to use Phobiq</h2>
+        <p>Please fill this form to create an account.</p>
+        <form id="register-form" action="/login.php">
+            <div>
+                <label>Username:<sup>*</sup></label>
+                <input id="username" type="text" name="username" class="form-control">
+                <span class="help-block"></span>
+            </div>    
+            <div>
+                <label>Password:<sup>*</sup></label>
+                <input id="password" type="password" name="password" class="form-control">
+                <span class="help-block"></span>
+            </div>
+            <div>
+                <label>Confirm Password:<sup>*</sup></label>
+                <input id="confirmed-password" type="password" name="confirm_password" class="form-control">
+                <span class="help-block"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Submit">
+                <input type="reset" class="btn btn-default" value="Reset">
+            </div>
+            <p>Already have an account? <a href="index.html">Login here</a>.</p>
+        </form>
+    </div>  
+</html>

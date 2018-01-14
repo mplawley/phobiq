@@ -19,7 +19,7 @@ DatabaseController.prototype.sendDataWithAjaxCall = function (blurController) {
 	});
 
 	request.done(function (response, textStatus, jqXHR) {
-		console.log("\nRequest is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
+		console.log("Request is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
