@@ -1,12 +1,6 @@
 <?php
     // Include config file
     require_once 'config.php';
-
-    function console_log( $data ) {
-        echo '<script>';
-        echo 'console.log('. json_encode( $data ) .')';
-        echo '</script>';
-    }
      
     // Define variables and initialize with empty values
     $username = $_POST['username'];
@@ -14,11 +8,9 @@
     $confirm_password = $_POST['confirmed_password'];
 
     $username_err = $password_err = $confirm_password_err = "";
-    console_log("step 1");
      
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        console_log("step 2");
      
         // Validate username
         if(empty(trim($_POST["username"]))){
@@ -26,11 +18,9 @@
         } else {
             // Prepare a select statement
             $sql = "SELECT user_id FROM USER_PROFILES WHERE username = ?";
-            console_log("step 3");
             
             if($stmt = $mysqli->prepare($sql)) {
                 // Bind variables to the prepared statement as parameters
-                console_log("step 4");
                 $stmt->bind_param("s", $param_username);
                 
                 // Set parameters
@@ -38,7 +28,6 @@
                 
                 // Attempt to execute the prepared statement
                 if($stmt->execute()){
-                    console_log("step 5");
                     // store result
                     $stmt->store_result();
                     
@@ -53,7 +42,6 @@
             }
              
             // Close statement
-            console_log("step 6");
             $stmt->close();
         }
         
@@ -67,7 +55,6 @@
         }
         
         // Validate confirm password
-        console_log("step 7");
         if(empty(trim($_POST["confirmed_password"]))) {
             $confirm_password_err = 'Please confirm password.';     
         } else {
@@ -79,7 +66,6 @@
         
         // Check input errors before inserting in database
         if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
-            console_log("step 8");
             // Prepare an insert statement
             $sql = "INSERT INTO USER_PROFILES (username, password) VALUES (?, ?)";
              
@@ -93,8 +79,10 @@
                 
                 // Attempt to execute the prepared statement
                 if($stmt->execute()) {
-                    // Redirect to login page
-                    header("Location:login.php");
+                    // Let the user start right away
+                    session_start();
+                    $_SESSION['username'] = $username;
+                    header("Location:welcome.php");
                     exit();
                 } else {
                     echo "Something went wrong. Please try again later.";
@@ -108,11 +96,6 @@
         // Close connection
         $mysqli->close();
     }
-
-    console_log("if there are any errors...");
-    console_log($username_err);
-    console_log($password_err);
-    console_log($confirm_password_err);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,7 +118,7 @@
     <div class="wrapper">
         <h2>Sign Up to use Phobiq</h2>
         <p>Please fill this form to create an account.</p>
-        <form id="register-form" action="/login.php">
+        <form id="register-form" action="/welcome.php">
             <div>
                 <label>Username:<sup>*</sup></label>
                 <input id="username" type="text" name="username" class="form-control">

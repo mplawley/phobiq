@@ -144,6 +144,11 @@ input {
   padding: 20px;
 }
 
+#errorList {
+  color: red;
+  font-size: 100%;
+}
+
 @keyframes hue-rotate {
   from {
     -webkit-filter: grayscale(30%) hue-rotate(0deg);
