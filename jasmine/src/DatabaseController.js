@@ -11,7 +11,8 @@ DatabaseController.prototype.sendDataWithAjaxCall = function (blurController) {
 	request = $.ajax({
 	    url: this.developmentURL,
 	    type: 'POST',
-	    data: { blurStepsTaken : blurController.getBlurStepsTaken(),
+	    data: { username : blurController.getUsername(),
+	    		blurStepsTaken : blurController.getBlurStepsTaken(),
 	    		currentBlur : blurController.getCurrentBlur(),
 	    		maxBlur : blurController.getMaxBlur(),
 	    		blurStep : blurController.getBlurStep() }

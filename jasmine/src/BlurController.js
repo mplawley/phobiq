@@ -1,5 +1,6 @@
 BlurController = function() {};
 
+BlurController.prototype.username;
 BlurController.prototype.maxBlur;
 BlurController.prototype.currentBlur;
 BlurController.prototype.blurStep;
@@ -24,6 +25,7 @@ BlurController.prototype.initializeValues = function() {
 
 BlurController.prototype.bindUserInterfaceElements = function() {
 	var _this = this;
+	username = $("#username").text();
 	blurSlider = $("#blurSlider");
 	images = $("#imageContainer");
 	downloadButton = $("#downloadButton");
@@ -112,6 +114,14 @@ BlurController.prototype.updateUserClickProgress = function() {
 
 BlurController.prototype.calculateRoundedPercentage = function(numerator, denominator) {
 	return Math.round((numerator / denominator) * 100);
+}
+
+BlurController.prototype.getUsername = function() {
+	return username;
+}
+
+BlurController.prototype.setUsername = function(newUsername) {
+	username = newUsername;
 }
 
 BlurController.prototype.getMaxBlur = function() {

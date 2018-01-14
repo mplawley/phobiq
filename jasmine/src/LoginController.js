@@ -18,7 +18,6 @@ LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 	_this = this;
 
 	$('#main-login-form').submit(function(event) {
-		event.preventDefault();
 		_this.handleLoginAttempt();
 	});
 }
