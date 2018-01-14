@@ -1,5 +1,6 @@
 BlurController = function() {};
 
+BlurController.prototype.username;
 BlurController.prototype.maxBlur;
 BlurController.prototype.currentBlur;
 BlurController.prototype.blurStep;
@@ -7,11 +8,13 @@ BlurController.prototype.blurSlider;
 BlurController.prototype.images;
 BlurController.prototype.downloadButton;
 BlurController.prototype.userProgressText;
+BlurController.prototype.databaseController;
 
 BlurController.prototype.init = function() {
 	this.initializeValues();
 	this.bindUserInterfaceElements();
 	this.initializeUserInterfaceValues();
+	this.databaseController = new DatabaseController();
 }
 
 BlurController.prototype.initializeValues = function() {
@@ -22,6 +25,7 @@ BlurController.prototype.initializeValues = function() {
 
 BlurController.prototype.bindUserInterfaceElements = function() {
 	var _this = this;
+	username = $("#username").text();
 	blurSlider = $("#blurSlider");
 	images = $("#imageContainer");
 	downloadButton = $("#downloadButton");
@@ -37,6 +41,7 @@ BlurController.prototype.bindUserInterfaceElements = function() {
 
 	downloadButton.click(function() {
 		_this.handleDownloadButtonClick();
+		_this.persistToDatabase();
 	});
 
 	//Prevent stray click-and-drags from revealing the image
@@ -79,8 +84,11 @@ BlurController.prototype.handleImageClick = function() {
 }
 
 BlurController.prototype.handleDownloadButtonClick = function() {
-	var numberOfUnblurStepsThisSession = this.getMaxBlur() - this.getCurrentBlur();
-    this.saveTextAsFile("Phobiq stats", numberOfUnblurStepsThisSession);
+    this.saveTextAsFile("Phobiq stats", this.getBlurStepsTaken());
+}
+
+BlurController.prototype.persistToDatabase = function() {
+	this.databaseController.sendDataWithAjaxCall(this);
 }
 
 BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
@@ -96,16 +104,24 @@ BlurController.prototype.saveTextAsFile = function(filename, textToSave) {
 }
 
 BlurController.prototype.updateSliderPosition = function() {
-	blurSlider[0].value = this.getMaxBlur() - this.getCurrentBlur();
+	blurSlider[0].value = this.getBlurStepsTaken();
 }
 
 BlurController.prototype.updateUserClickProgress = function() {
-	var resultPercentage = this.calculateRoundedPercentage(this.getMaxBlur() - this.getCurrentBlur(), this.getMaxBlur());
+	var resultPercentage = this.calculateRoundedPercentage(this.getBlurStepsTaken(), this.getMaxBlur());
 	userProgressText.html(resultPercentage + "\%");
 }
 
 BlurController.prototype.calculateRoundedPercentage = function(numerator, denominator) {
 	return Math.round((numerator / denominator) * 100);
+}
+
+BlurController.prototype.getUsername = function() {
+	return username;
+}
+
+BlurController.prototype.setUsername = function(newUsername) {
+	username = newUsername;
 }
 
 BlurController.prototype.getMaxBlur = function() {
@@ -130,4 +146,8 @@ BlurController.prototype.getBlurStep = function() {
 
 BlurController.prototype.setBlurStep = function(newBlurStepValue) {
 	blurStep = newBlurStepValue;
+}
+
+BlurController.prototype.getBlurStepsTaken = function() {
+	return this.getMaxBlur() - this.getCurrentBlur();
 }
