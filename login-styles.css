@@ -129,6 +129,7 @@ input {
 }
 
 #loginHeader {
+  position: absolute;
   color: white;
 }
 

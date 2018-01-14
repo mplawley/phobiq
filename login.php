@@ -50,7 +50,6 @@
                                 session_start();
                                 $_SESSION['username'] = $username;
                                 header("Location: /welcome.php");
-                                exit();
                             } else {
                                 // Display an error message if password is not valid
                                 $password_err = 'The password you entered was not valid.';
