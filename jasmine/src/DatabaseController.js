@@ -1,7 +1,7 @@
 DatabaseController = function() {};
 
 DatabaseController.prototype.request;
-DatabaseController.prototype.developmentURL = "http://localhost:8888/dbConnection.php";
+DatabaseController.prototype.developmentURL = "/dbConnection.php";
 
 DatabaseController.prototype.sendDataWithAjaxCall = function (blurController) {
 	if (this.request) {

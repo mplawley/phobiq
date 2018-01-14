@@ -1,7 +1,7 @@
 RegisterController = function() {};
 
 RegisterController.prototype.request;
-RegisterController.prototype.developmentRegisterURL = "http://localhost:8888/register.php";
+RegisterController.prototype.developmentRegisterURL = "/register.php";
 
 RegisterController.prototype.init = function() {
 	this.initializeStates();
