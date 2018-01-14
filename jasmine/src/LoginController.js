@@ -48,10 +48,6 @@ LoginController.prototype.handleLoginAttempt = function () {
 
 	request.done(function (response, textStatus, jqXHR) {
 		console.log("Request is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
-		//Hack to include MAMP compatibility without relying on ob.flush in PHP
-		if (response.toString().includes("<!DOCTYPE html>")) {
-			window.location = "/login.php";
-		}
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
