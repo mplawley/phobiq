@@ -49,8 +49,8 @@
                                 save the username to the session */
                                 session_start();
                                 $_SESSION['username'] = $username;
-                                header("Location: /welcome.php");
-                                exit();
+                                header("location: /welcome.php");
+                                exit;
                             } else {
                                 // Display an error message if password is not valid
                                 $password_err = 'The password you entered was not valid.';
@@ -71,6 +71,13 @@
         
         // Close connection
         $mysqli->close();
+    }
+
+    if (!empty($username_err)) {
+        echo "username_err: " . $username_err;
+    }
+    if (!empty($password_err)) {
+        echo "password_err: " .  $password_err;
     }
 ?>
 <!DOCTYPE html>
@@ -101,9 +108,14 @@
       </p>
       <input id="username" type="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
       <input id="password" type="password" class="login-password" required="true" placeholder="Password" />
-      <input id="login-button" type="submit" name="Login" value="Login" class="login-submit" />
-      <a id="registerLink" href="/register.html">Not a member yet? Register for free!</a>
+      <input id="login-button" type="submit" name="Login" value="Login" class="login-submit"/>
+      <a id="registerLink" href="/register.php">Not a member yet? Register for free!</a>
     </form>
+
+    <div id="errors">
+        <ul id="errorList">
+        </ul>
+    </div>
 
     <a href="#" class="login-forgot-pass">forgot password?</a>
     <div class="underlay-photo"></div>

@@ -3,7 +3,6 @@ LoginController = function() {};
 LoginController.prototype.numberOfLoginAttempts;
 LoginController.prototype.request;
 LoginController.prototype.developmentLoginURL = "/login.php";
-LoginController.prototype.registerPathToHTML = 'register.html';
 
 LoginController.prototype.init = function() {
 	this.initializeStates();
@@ -17,7 +16,7 @@ LoginController.prototype.initializeStates = function() {
 LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 	_this = this;
 
-	$('#main-login-form').submit(function(event) {
+	$('#login-button').click(function() {
 		_this.handleLoginAttempt();
 	});
 }
@@ -26,15 +25,17 @@ LoginController.prototype.handleLoginAttempt = function () {
 	_this = this;
 
 	if (this.numberOfLoginAttempts > 10) {
-		console.log("Too many login attempts");
+		this.addListItemToErrorList("Too many login attempts");
 		return;
 	}
 
 	if (!this.formIsValid()) {
+		this.addListItemToErrorList("Missing or invalid inputs");
 		return;
 	}
 
 	if (this.request) {
+		this.addListItemToErrorList("Request already made; wait and try again.");
 		this.request.abort();
 	}
 	
@@ -46,10 +47,12 @@ LoginController.prototype.handleLoginAttempt = function () {
 	});
 
 	request.done(function (response, textStatus, jqXHR) {
+		if (response.contains)
 		console.log("Request is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
+		_this.addListItemToErrorList("Communication with server failed.");
 		console.error("The following error occurred: " +
 						textStatus, errorThrown, jqXHR
 					 );
@@ -61,12 +64,8 @@ LoginController.prototype.handleLoginAttempt = function () {
 }
 
 LoginController.prototype.formIsValid = function() {
-	if (!this.retrieveSubmittedUserNameFromDOM() || !this.retrieveSubmittedPasswordFromDOM()) {
-		console.log("form failed validation");
-		return false;
-	} else {
-		return true;
-	}
+	return this.retrieveSubmittedUserNameFromDOM() &&
+		   this.retrieveSubmittedPasswordFromDOM();
 }
 
 LoginController.prototype.incrementNumberOfLoginAttempts = function() {
@@ -83,6 +82,10 @@ LoginController.prototype.retrieveSubmittedUserNameFromDOM = function() {
 
 LoginController.prototype.retrieveSubmittedPasswordFromDOM = function() {
 	return $("#password").val();
+}
+
+LoginController.prototype.addListItemToErrorList = function(errorItem) {
+	$("#errorList").append("<li>" + errorItem + "</li>");
 }
 
 $(document).ready(function() {
