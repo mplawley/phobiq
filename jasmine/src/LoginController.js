@@ -2,7 +2,7 @@ LoginController = function() {};
 
 LoginController.prototype.numberOfLoginAttempts;
 LoginController.prototype.request;
-LoginController.prototype.developmentLoginURL = "http://localhost:8888/login.php";
+LoginController.prototype.developmentLoginURL = "/login.php";
 LoginController.prototype.registerPathToHTML = 'register.html';
 
 LoginController.prototype.init = function() {

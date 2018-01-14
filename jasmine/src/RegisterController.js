@@ -12,7 +12,6 @@ RegisterController.prototype.linkUserInterfacetoFunctionality = function() {
 	_this = this;
 
 	$("#register-form").submit(function(event) {
-		event.preventDefault();
 		_this.handleRegistrationCompletion();
 		_this.deactivateLoginForm();
 	});
