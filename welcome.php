@@ -24,6 +24,8 @@
     <script src="jasmine/src/ImagePickerController.js"></script>
     <script src="jasmine/src/Main.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="jasmine/src/dropzone.js"></script>
+
     <title>Phobiq</title>
     </head>
 
@@ -47,9 +49,11 @@
         </div>
 
         <div id="pageUtils">
-          <button id="downloadButton" type="button" class="consoleButtons">Save performance</button>
-          <button id="clearImagesButton" type="button" class="consoleButtons">Clear images</button>
-          <button id="imagePickerButton" type="button" class="consoleButtons">Search web for frightening images</button>
+            <button id="downloadButton" type="button" class="consoleButtons">Save performance</button>
+            <button id="clearImagesButton" type="button" class="consoleButtons">Clear images</button>
+            <button id="imagePickerButton" type="button" class="consoleButtons">Search web for frightening images</button>
+
+            <form action="/file-upload" class="dropzone" id="image-dropzone"></form>
         </div>
     </body>
 </html>
