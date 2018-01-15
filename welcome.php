@@ -15,7 +15,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="blurcontroller-styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/blurcontroller-styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/basic.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/dropzone.min.css">
 
     <script src="jquery-3.2.1.min.js"></script>
     <script src="http://www.google.com/jsapi" type="text/javascript"></script>
@@ -24,7 +26,8 @@
     <script src="jasmine/src/ImagePickerController.js"></script>
     <script src="jasmine/src/Main.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="jasmine/src/dropzone.js"></script>
+    <script src="styles/dropzone.min.js"></script>
+    <script src="styles/dropzone-amd-module.min.js"></script>
 
     <title>Phobiq</title>
     </head>
@@ -34,11 +37,15 @@
         <div class="page-header">
             <h1>Hi, <b><span id="username"><?php echo $_SESSION['username']; ?></span></b>. Welcome to our site.</h1>
         </div>
-            <p><a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a></p>
+
+        <div id="pageUtils">
+            <button id="downloadButton" type="button" class="consoleButtons">Save performance</button>
+            <button id="clearImagesButton" type="button" class="consoleButtons">Clear images</button>
+            <button id="signOutButton" type="button" class="consoleButtons">Sign out</button>
+        </div>
 
         <div id="imageContainer">
             <img class="imageToBlur" src="images/bloodImage.png"/>
-            <img class="imageToBlur" src="images/cockroach.jpg"/>
         </div>
 
         <p id="instructions">Click above or move the slider to change the blur.</p>
@@ -48,12 +55,9 @@
             <p id="userProgressText">0%</p>
         </div>
 
-        <div id="pageUtils">
-            <button id="downloadButton" type="button" class="consoleButtons">Save performance</button>
-            <button id="clearImagesButton" type="button" class="consoleButtons">Clear images</button>
-            <button id="imagePickerButton" type="button" class="consoleButtons">Search web for frightening images</button>
-
-            <form action="/file-upload" class="dropzone" id="image-dropzone"></form>
+        <div id="bottomDiv">
+            <form id="image-dropzone" class="dropzone" action="/file-upload"></form>
         </div>
+
     </body>
 </html>

@@ -159,3 +159,15 @@ body {
 	background-color: gray;
 	padding: 30px;
 }
+
+#image-dropzone {
+	border: 1px dashed blue;
+	background-color: #474258;
+	min-height: 100px;
+	width: 50%;
+	font-size: 16px;
+	color: white;
+	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+}

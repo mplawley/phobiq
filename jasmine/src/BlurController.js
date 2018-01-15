@@ -7,6 +7,7 @@ BlurController.prototype.blurStep;
 BlurController.prototype.blurSlider;
 BlurController.prototype.images;
 BlurController.prototype.downloadButton;
+BlurController.prototype.signOutButton;
 BlurController.prototype.userProgressText;
 BlurController.prototype.databaseController;
 
@@ -29,6 +30,7 @@ BlurController.prototype.bindUserInterfaceElements = function() {
 	blurSlider = $("#blurSlider");
 	images = $("#imageContainer");
 	downloadButton = $("#downloadButton");
+	signOutButton = $("#signOutButton");
 	userProgressText = $("#userProgressText");
 
 	blurSlider.on("input", function() {
@@ -42,6 +44,10 @@ BlurController.prototype.bindUserInterfaceElements = function() {
 	downloadButton.click(function() {
 		_this.handleDownloadButtonClick();
 		_this.persistToDatabase();
+	});
+
+	signOutButton.click(function() {
+		_this.handleSignOutButtonClick();
 	});
 
 	//Prevent stray click-and-drags from revealing the image
@@ -85,6 +91,10 @@ BlurController.prototype.handleImageClick = function() {
 
 BlurController.prototype.handleDownloadButtonClick = function() {
     this.saveTextAsFile("Phobiq stats", this.getBlurStepsTaken());
+}
+
+BlurController.prototype.handleSignOutButtonClick = function() {
+	location.href = "logout.php";
 }
 
 BlurController.prototype.persistToDatabase = function() {
