@@ -18,8 +18,10 @@
     <link rel="stylesheet" type="text/css" href="blurcontroller-styles.css">
 
     <script src="jquery-3.2.1.min.js"></script>
+    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
     <script src="jasmine/src/DatabaseController.js"></script>
     <script src="jasmine/src/BlurController.js"></script>
+    <script src="jasmine/src/ImagePickerController.js"></script>
     <script src="jasmine/src/Main.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <title>Phobiq</title>
@@ -45,7 +47,9 @@
         </div>
 
         <div id="pageUtils">
-          <button id="downloadButton" type="button">Download stats</button>
+          <button id="downloadButton" type="button" class="consoleButtons">Save performance</button>
+          <button id="clearImagesButton" type="button" class="consoleButtons">Clear images</button>
+          <button id="imagePickerButton" type="button" class="consoleButtons">Search web for frightening images</button>
         </div>
     </body>
 </html>
