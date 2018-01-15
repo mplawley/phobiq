@@ -99,16 +99,17 @@
   <body>
     <h1 id="loginHeader">Phobiq login</h1>
 
-    <form id="main-login-form" class="login-form" action="/welcome.php">
+    <form id="main-login-form" class="login-form" action="/login.php" method="post">
       <p class="login-text">
         <span class="fa-stack fa-lg">
           <i class="fa fa-circle fa-stack-2x"></i>
           <i class="fa fa-lock fa-stack-1x"></i>
         </span>
       </p>
-      <input id="username" type="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
-      <input id="password" type="password" class="login-password" required="true" placeholder="Password" />
+      <input id="username" name="username" type="email" class="login-username" autofocus="true" required="true" placeholder="Email" />
+      <input id="password" name="password" type="password" class="login-password" required="true" placeholder="Password" />
       <input id="login-button" type="submit" name="Login" value="Login" class="login-submit"/>
+
       <a id="registerLink" href="/register.php">Not a member yet? Register for free!</a>
     </form>
 
