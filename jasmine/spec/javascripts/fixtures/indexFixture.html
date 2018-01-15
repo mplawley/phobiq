@@ -1,0 +1,31 @@
+<html>
+
+  <head>
+  	<link rel="stylesheet" type="text/css" href="styles.css">
+  	<script src="jquery-3.2.1.min.js"></script>
+  	<script src="jasmine/src/BlurController.js"></script>
+    <script src="jasmine/src/Main.js"></script>
+    <title>Phobiq</title>
+  </head>
+
+  <body>
+  	<h1>Phobiq</h1>
+
+		<div id="imageContainer">
+			<img class="imageToBlur" src="images/bloodImage.png"/>
+      <img class="imageToBlur" src="images/cockroach.jpg"/>
+		</div>
+
+		<p id="instructions">Click above or move the slider to change the blur.</p>
+
+		<div id="sliders">
+	 		<input id="blurSlider" type="range" value="0" max="100" min="0" step="1"/>
+      <p id="userProgressText">0</p>
+		</div>
+
+    <div id="pageUtils">
+      <button id="downloadButton" type="button">Download stats</button>
+    </div>
+  </body>
+
+</html>
