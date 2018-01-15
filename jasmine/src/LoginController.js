@@ -1,16 +1,10 @@
 LoginController = function() {};
 
-LoginController.prototype.numberOfLoginAttempts;
-LoginController.prototype.request;
-LoginController.prototype.developmentLoginURL = "/login.php";
+LoginController.prototype.numberOfLoginAttempts = 0;
+LoginController.prototype.allowedNumberOfLogins = 10;
 
 LoginController.prototype.init = function() {
-	this.initializeStates();
 	this.linkUserInterfacetoFunctionality();
-}
-
-LoginController.prototype.initializeStates = function() {
-	this.setNumberOfLoginAttempts(0);
 }
 
 LoginController.prototype.linkUserInterfacetoFunctionality = function() {
@@ -22,9 +16,9 @@ LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 }
 
 LoginController.prototype.handleLoginAttempt = function () {
-	_this = this;
+	this.incrementNumberOfLoginAttempts();
 
-	if (this.numberOfLoginAttempts > 10) {
+	if (this.numberOfLoginAttempts > this.allowedNumberOfLogins) {
 		this.addListItemToErrorList("Too many login attempts");
 		return;
 	}
@@ -33,34 +27,6 @@ LoginController.prototype.handleLoginAttempt = function () {
 		this.addListItemToErrorList("Missing or invalid inputs");
 		return;
 	}
-
-	if (this.request) {
-		this.addListItemToErrorList("Request already made; wait and try again.");
-		this.request.abort();
-	}
-	
-	request = $.ajax({
-	    url: this.developmentLoginURL,
-	    type: 'POST',
-	    data: { username : this.retrieveSubmittedUserNameFromDOM(),
-	    		password : this.retrieveSubmittedPasswordFromDOM() }
-	});
-
-	request.done(function (response, textStatus, jqXHR) {
-		if (response.contains)
-		console.log("Request is done: " + response + " textStatus: " + textStatus + " jqXHR: " + jqXHR);
-	});
-
-	request.fail(function (jqXHR, textStatus, errorThrown) {
-		_this.addListItemToErrorList("Communication with server failed.");
-		console.error("The following error occurred: " +
-						textStatus, errorThrown, jqXHR
-					 );
-	});
-
-	request.always(function () {
-		_this.incrementNumberOfLoginAttempts();
-	});
 }
 
 LoginController.prototype.formIsValid = function() {

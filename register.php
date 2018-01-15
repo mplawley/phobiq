@@ -2,10 +2,10 @@
     // Include config file
     require_once 'config.php';
      
-    // Define variables and initialize with empty values
+    // Define variables
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $confirm_password = $_POST['confirmed_password'];
+    $confirm_password = $_POST['confirm_password'];
 
     $username_err = $password_err = $confirm_password_err = "";
      
@@ -55,10 +55,10 @@
         }
         
         // Validate confirm password
-        if(empty(trim($_POST["confirmed_password"]))) {
+        if(empty(trim($_POST["confirm_password"]))) {
             $confirm_password_err = 'Please confirm password.';     
         } else {
-            $confirm_password = trim($_POST['confirmed_password']);
+            $confirm_password = trim($_POST['confirm_password']);
             if($password != $confirm_password) {
                 $confirm_password_err = 'Password did not match.';
             }
@@ -82,8 +82,8 @@
                     // Let the user start right away
                     session_start();
                     $_SESSION['username'] = $username;
-                    header("Location:welcome.php");
-                    exit();
+                    header("location: welcome.php");
+                    exit;
                 } else {
                     echo "Something went wrong. Please try again later.";
                 }
@@ -96,6 +96,9 @@
         // Close connection
         $mysqli->close();
     }
+    echo $username_err;
+    echo $password_err;
+    echo $confirm_password_err;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +111,6 @@
     <link rel="stylesheet" type="text/css" href="login-styles.css">
     
     <script src="jquery-3.2.1.min.js"></script>
-    <script src="jasmine/src/RegisterController.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <title>Phobiq</title>
   </head>
@@ -118,7 +120,7 @@
     <div class="wrapper">
         <h2>Sign Up to use Phobiq</h2>
         <p>Please fill this form to create an account.</p>
-        <form id="register-form" action="/welcome.php">
+        <form id="register-form" action="/register.php" method="post">
             <div>
                 <label>Username:<sup>*</sup></label>
                 <input id="username" type="text" name="username" class="form-control">
