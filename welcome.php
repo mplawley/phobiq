@@ -55,7 +55,7 @@
         </div>
 
         <div id="bottomDiv">
-            <form id="image-dropzone" class="dropzone" action="/file-upload"></form>
+            <form id="image-dropzone" class="dropzone" name="file" action="/file-upload.php"></form>
         </div>
 
     </body>
