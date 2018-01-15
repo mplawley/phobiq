@@ -26,8 +26,7 @@
     <script src="jasmine/src/ImagePickerController.js"></script>
     <script src="jasmine/src/Main.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="styles/dropzone.min.js"></script>
-    <script src="styles/dropzone-amd-module.min.js"></script>
+    <script src="resources/dropzone.min.js"></script>
 
     <title>Phobiq</title>
     </head>
