@@ -4,4 +4,7 @@ $(document).ready(function() {
 
     imagePickerController = new ImagePickerController();
     imagePickerController.init();
+
+    imageViewController = new ImageViewController();
+    imageViewController.init();
 });

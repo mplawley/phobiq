@@ -7,10 +7,6 @@ ImagePickerController.prototype.init = function() {
 ImagePickerController.prototype.bindUserInterfaceElements = function() {
 	var _this = this;
 
-	$("#imagePickerButton").click(function() {
-		_this.handleImagePickerButtonClick();
-	});
-
 	$("#clearImagesButton").click(function() {
 		_this.handleImageClearButtonClick();
 	});
@@ -19,10 +15,3 @@ ImagePickerController.prototype.bindUserInterfaceElements = function() {
 ImagePickerController.prototype.handleImageClearButtonClick = function() {
 	$("#imageContainer").empty();
 }
-
-ImagePickerController.prototype.handleImagePickerButtonClick = function() {
-	
-
-}
-
-//save images chosen to db automatically
