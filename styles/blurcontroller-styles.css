@@ -7,7 +7,15 @@
 
 .imageToBlur {
 	width: 500px;
-	height: 377px;
+	height: 400px;
+}
+
+.imageToBlur {
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 #pageUtils {
@@ -160,7 +168,7 @@ body {
 	padding: 30px;
 }
 
-#image-dropzone {
+#imageDropzone {
 	width: 50%;
 	color: white;
 	font-size: 22px;

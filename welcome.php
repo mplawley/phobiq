@@ -20,14 +20,13 @@
     <link rel="stylesheet" type="text/css" href="styles/dropzone.min.css">
 
     <script src="jquery-3.2.1.min.js"></script>
-    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="resources/dropzone.min.js"></script>
     <script src="jasmine/src/DatabaseController.js"></script>
     <script src="jasmine/src/BlurController.js"></script>
     <script src="jasmine/src/ImagePickerController.js"></script>
     <script src="jasmine/src/ImageViewController.js"></script>
     <script src="jasmine/src/Main.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="resources/dropzone.min.js"></script>
 
     <title>Phobiq</title>
     </head>
@@ -44,8 +43,8 @@
             <button id="signOutButton" type="button" class="consoleButtons">Sign out</button>
         </div>
 
-        <div id="imageContainer">
-            <img class="imageToBlur" src="images/bloodImage.png"/>
+        <div id="imageContainer" class="imageToBlur">
+
         </div>
 
         <p id="instructions">Click above or move the slider to change the blur.</p>
@@ -56,7 +55,7 @@
         </div>
 
         <div id="bottomDiv">
-            <form id="image-dropzone" class="dropzone" name="file" action="/file-upload.php"></form>
+            <form id="imageDropzone" class="dropzone" name="file" action="/file-upload.php"></form>
         </div>
 
     </body>
