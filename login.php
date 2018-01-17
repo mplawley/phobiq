@@ -88,7 +88,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="login-styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/login-styles.css">
     
     <script src="jquery-3.2.1.min.js"></script>
     <script src="jasmine/src/LoginController.js"></script>
