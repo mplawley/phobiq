@@ -20,4 +20,5 @@ ImagePickerController.prototype.handleImageClearButtonClick = function() {
 	}, 600);
 
 	imageViewController.animateImageContainerLimitDiv();
+	imageViewController.loadedImages = [];
 }
