@@ -43,9 +43,11 @@
             <button id="signOutButton" type="button" class="consoleButtons">Sign out</button>
         </div>
 
-        <div id="imageContainer" class="imageToBlur">
-
+        <div id="imageContainerLimit">
+            <div id="imageContainer" class="imageToBlur"> </div>
         </div>
+
+        
 
         <p id="instructions">Click above or move the slider to change the blur.</p>
 

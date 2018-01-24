@@ -14,4 +14,10 @@ ImagePickerController.prototype.bindUserInterfaceElements = function() {
 
 ImagePickerController.prototype.handleImageClearButtonClick = function() {
 	$("#imageContainer").empty();
+
+	$("#imageContainer").animate({
+	    height: 300
+	}, 600);
+
+	imageViewController.animateImageContainerLimitDiv();
 }
