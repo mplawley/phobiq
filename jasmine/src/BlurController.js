@@ -33,7 +33,6 @@ BlurController.prototype.images;
 BlurController.prototype.downloadButton;
 BlurController.prototype.signOutButton;
 BlurController.prototype.userProgressText;
-BlurController.prototype.databaseController;
 
 /************************************************
  ****************** BEHAVIORS *******************
@@ -44,7 +43,6 @@ BlurController.prototype.init = function() {
 	this.initializeBlurValues();
 	this.bindUserInterfaceElements();
 	this.initializeUserInterfaceValues();
-	this.databaseController = new DatabaseController();
 }
 
 //Requirements state that our blue should range from 0 - 100.
@@ -168,7 +166,7 @@ BlurController.prototype.handleSignOutButtonClick = function() {
 
 //Make an AJAX call on the databaseController.
 BlurController.prototype.persistToDatabase = function() {
-	this.databaseController.sendDataWithAjaxCall(this);
+	databaseController.sendDataWithAjaxCall(this);
 }
 
 //Move the handle on the slider.

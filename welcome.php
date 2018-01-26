@@ -24,8 +24,9 @@
     <script src="resources/dropzone.min.js"></script>
     <script src="jasmine/src/DatabaseController.js"></script>
     <script src="jasmine/src/BlurController.js"></script>
-    <script src="jasmine/src/ImagePickerController.js"></script>
+    <script src="jasmine/src/ClearButtonController.js"></script>
     <script src="jasmine/src/ImageViewController.js"></script>
+    <script src="jasmine/src/DropzoneController.js"></script>
     <script src="jasmine/src/Main.js"></script>
 
     <title>Phobiq</title>
