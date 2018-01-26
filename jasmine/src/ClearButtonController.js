@@ -5,10 +5,12 @@
 
 ClearButtonController = function() {};
 
+//This is called by Main.js
 ClearButtonController.prototype.init = function() {
 	this.bindUserInterfaceElements();
 }
 
+//Bind the clear button to an action.
 ClearButtonController.prototype.bindUserInterfaceElements = function() {
 	var _this = this;
 
@@ -17,6 +19,8 @@ ClearButtonController.prototype.bindUserInterfaceElements = function() {
 	});
 }
 
+//Empty the imageContainer div, animate it to its new size
+//and clear out the images loaded on the imageViewController
 ClearButtonController.prototype.handleImageClearButtonClick = function() {
 	$("#imageContainer").empty();
 
