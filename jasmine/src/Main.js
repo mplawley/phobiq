@@ -15,4 +15,7 @@ $(document).ready(function() {
 
     databaseController = new DataBaseController();
     databaseController.init();
+
+    loginController = new LoginController();
+    loginController.init();
 });
