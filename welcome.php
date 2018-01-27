@@ -49,8 +49,6 @@
             <div id="imageContainer" class="imageToBlur"> </div>
         </div>
 
-        
-
         <p id="instructions">Click above or move the slider to change the blur.</p>
 
         <div id="sliders">

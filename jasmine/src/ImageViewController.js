@@ -17,6 +17,7 @@ ImageViewController.prototype.init = function() {
 //Get images from the server
 ImageViewController.prototype.getImages = function() {
 	var _this = this;
+	
 	$.ajax({
 	    url : this.directoryToGetImagesFrom,
 	    success: function (data) {

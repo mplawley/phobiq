@@ -25,11 +25,14 @@ ClearButtonController.prototype.handleImageClearButtonClick = function() {
 	$("#imageContainer").empty();
 
 	$("#imageContainer").animate({
-	    height: 300
+	    height: 400
 	}, 600);
 
 	imageViewController.animateImageContainerLimitDiv();
 
 	//Clear out the images that are loaded in the imageViewController
 	imageViewController.loadedImages = [];
+
+	//Clear out the images in the user's directory
+	imageDAO.clearImagesFromDirectory();
 }
