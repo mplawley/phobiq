@@ -23,6 +23,7 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="resources/dropzone.min.js"></script>
     <script src="jasmine/src/DatabaseController.js"></script>
+    <script src="jasmine/src/LoginController.js"></script>
     <script src="jasmine/src/BlurController.js"></script>
     <script src="jasmine/src/ClearButtonController.js"></script>
     <script src="jasmine/src/ImageViewController.js"></script>

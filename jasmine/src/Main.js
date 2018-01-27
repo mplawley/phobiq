@@ -1,10 +1,15 @@
 /*
  * Phobiq: This controller builds the core objects we need
- * to use Phobiq, such as the blurController.
+ * to use Phobiq, such as the blurController. While we aim to 
+ * decouple these controllers, whenever there is a dependency between
+ * controllers, we inject the dependency through the constructor 
+ * argument.
  */
 
 $(document).ready(function() {
-    blurController = new BlurController();
+	databaseController = new DatabaseController();
+
+    blurController = new BlurController(databaseController);
     blurController.init();
 
     clearButtonController = new ClearButtonController();
@@ -12,9 +17,6 @@ $(document).ready(function() {
 
     imageViewController = new ImageViewController();
     imageViewController.init();
-
-    databaseController = new DataBaseController();
-    databaseController.init();
 
     loginController = new LoginController();
     loginController.init();

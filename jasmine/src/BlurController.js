@@ -129,7 +129,8 @@ BlurController.prototype.handleImageClick = function() {
 
 //Requirements state that we must allow the user to save all data
 //locally with a blob. If these requirements ever become more expansive,
-//refactor this Controller to allow another script to handle this functionality.
+//refactor this Controller to allow data transfer and data access
+//objects and allow a service layer or something similar handle this functionality.
 BlurController.prototype.handleDownloadButtonClick = function() {
     this.saveTextAsFile("Phobiq stats",
     					"User name: " + this.getUsername() + "\n" +
