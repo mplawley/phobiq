@@ -1,29 +1,36 @@
+/* Blur anything in the image container */
 #imageContainer {
-	min-height: 400px;
-  	height:auto !important;
-  	height: 400px;
 	opacity: 100;
 	-webkit-filter: blur(100px); /* Safari 6.0 - 9.0 */
-		filter: blur(100px);
+	filter: blur(100px);
+	display: table-row;
 }
 
-#imageContainerLimit {
-	height: auto;
-	position: relative;
-	overflow: hidden;
-}
-
-.imageToBlur {
-	width: 500px;
-	height: 400px;
-}
-
-.imageToBlur {
+/* Don't allow the image container to be selectable */
+#imageContainer {
     -khtml-user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+}
+
+/* Set the height for the image container */
+#imageContainer {
+	min-height: 400px;
+  	height: auto;
+  	height: 400px;
+}
+
+/* 
+ * Allow the wrapper for the image container to be adjustable in height to fit
+ * appended child elements
+ */
+#imageContainerLimit {
+	height: auto;
+	position: relative;
+	overflow: hidden;
+	display: table;
 }
 
 #pageUtils {
