@@ -23,9 +23,12 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="resources/dropzone.min.js"></script>
     <script src="jasmine/src/DatabaseController.js"></script>
+    <script src="jasmine/src/LoginController.js"></script>
     <script src="jasmine/src/BlurController.js"></script>
-    <script src="jasmine/src/ImagePickerController.js"></script>
+    <script src="jasmine/src/ClearButtonController.js"></script>
     <script src="jasmine/src/ImageViewController.js"></script>
+    <script src="jasmine/src/DropzoneController.js"></script>
+    <script src="jasmine/src/ImageDAO.js"></script>
     <script src="jasmine/src/Main.js"></script>
 
     <title>Phobiq</title>
@@ -43,8 +46,8 @@
             <button id="signOutButton" type="button" class="consoleButtons">Sign out</button>
         </div>
 
-        <div id="imageContainer" class="imageToBlur">
-
+        <div id="imageContainerLimit">
+            <div id="imageContainer"> </div>
         </div>
 
         <p id="instructions">Click above or move the slider to change the blur.</p>

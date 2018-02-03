@@ -118,7 +118,7 @@ input {
 }
 .underlay-photo {
   animation: hue-rotate 6s infinite;
-  background: url('http://www.technocrazed.com/wp-content/uploads/2015/12/beautiful-wallpaper-download-14.jpg');
+  background: url('../images/welcomePic.jpg');
   background-size: cover;
   -webkit-filter: grayscale(30%);
   z-index: -1;

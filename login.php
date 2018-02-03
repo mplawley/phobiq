@@ -72,13 +72,6 @@
         // Close connection
         $mysqli->close();
     }
-
-    if (!empty($username_err)) {
-        echo "username_err: " . $username_err;
-    }
-    if (!empty($password_err)) {
-        echo "password_err: " .  $password_err;
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,8 +84,8 @@
     <link rel="stylesheet" type="text/css" href="styles/login-styles.css">
     
     <script src="jquery-3.2.1.min.js"></script>
-    <script src="jasmine/src/LoginController.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="jasmine/src/LoginController.js"></script>
     <title>Phobiq</title>
   </head>
 
@@ -111,12 +104,20 @@
       <input id="login-button" type="submit" name="Login" value="Login" class="login-submit"/>
 
       <a id="registerLink" href="/register.php">Not a member yet? Register for free!</a>
-    </form>
 
-    <div id="errors">
-        <ul id="errorList">
-        </ul>
-    </div>
+        <div id="errors">
+            <ul id="errorList">
+                <?php
+                    if (!empty($username_err)) {
+                        echo $username_err;
+                    }
+                    if (!empty($password_err)) {
+                        echo $password_err;
+                    }
+                ?>
+            </ul>
+        </div>
+    </form>
 
     <a href="#" class="login-forgot-pass">forgot password?</a>
     <div class="underlay-photo"></div>
