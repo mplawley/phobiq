@@ -2,7 +2,7 @@ Dropzone.options.imageDropzone = {
 	  url: "/file-upload.php",
 	  paramName: "file", // The name that will be used to transfer the file
 	  maxFilesize: 2, // MB
-	  maxFiles: 100,
+	  maxFiles: 50,
 	  acceptedFiles: 'image/*',
 	  resizeHeight: 400,
 	  clickable: true,

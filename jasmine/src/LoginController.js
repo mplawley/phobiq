@@ -17,7 +17,7 @@ LoginController.prototype.allowedNumberOfLogins = 10;
  ******************* BEHAVIORS ******************
  ************************************************/
 
-//Init is called by Main.js
+//Init is called by document.ready in this script
 LoginController.prototype.init = function() {
 	this.linkUserInterfacetoFunctionality();
 }
@@ -62,6 +62,7 @@ LoginController.prototype.loginFormIsValid = function() {
 
 LoginController.prototype.incrementNumberOfLoginAttempts = function() {
 	numberOfLoginAttempts += 1;
+	console.log("incremeent login attempts" + numberOfLoginAttempts);
 }
 
 LoginController.prototype.setNumberOfLoginAttempts = function(newNumberOfLoginAttempts) {
@@ -75,4 +76,9 @@ LoginController.prototype.retrieveSubmittedUserNameFromDOM = function() {
 LoginController.prototype.retrieveSubmittedPasswordFromDOM = function() {
 	return $("#password").val();
 }
+
+$(document).ready(function() {
+	loginController = new LoginController();
+	loginController.init();
+});
 

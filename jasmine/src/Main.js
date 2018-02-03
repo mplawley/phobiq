@@ -12,12 +12,11 @@ $(document).ready(function() {
     blurController = new BlurController(databaseController);
     blurController.init();
 
-    clearButtonController = new ClearButtonController();
+    imageDAO = new ImageDAO();
+
+    clearButtonController = new ClearButtonController(imageDAO);
     clearButtonController.init();
 
     imageViewController = new ImageViewController();
     imageViewController.init();
-
-    loginController = new LoginController();
-    loginController.init();
 });

@@ -26,6 +26,7 @@ ImageViewController.prototype.getImages = function() {
 	            if( val.match(/\.(jpe?g|png|gif)$/) && $.inArray(folder + val, _this.loadedImages) == -1 ) { 
 	            	//Append those images to the imageContainer div
 	                $("#imageContainer").append( "<img src='"+ folder + val +"'>" );
+	                console.log($("#imageContainer").height());
 	                //Also put them on the loadedImages array
 	                _this.loadedImages.push(folder + val);
 	                //And animate the resizing of the imageContainer div

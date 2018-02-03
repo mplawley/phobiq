@@ -84,8 +84,8 @@
     <link rel="stylesheet" type="text/css" href="styles/login-styles.css">
     
     <script src="jquery-3.2.1.min.js"></script>
-    <script src="jasmine/src/LoginController.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="jasmine/src/LoginController.js"></script>
     <title>Phobiq</title>
   </head>
 
