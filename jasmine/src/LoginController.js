@@ -34,17 +34,8 @@ LoginController.prototype.linkUserInterfacetoFunctionality = function() {
 //Allow the user to login and guard against too many login attempts
 //Build up an error list and output it later
 LoginController.prototype.handleLoginAttempt = function () {
-	this.incrementNumberOfLoginAttempts();
-
-	if (this.numberOfLoginAttempts > this.allowedNumberOfLogins) {
-		this.addListItemToErrorList("Too many login attempts");
-		return;
-	}
-
-	if (!this.loginFormIsValid()) {
-		this.addListItemToErrorList("Missing or invalid inputs");
-		return;
-	}
+	//TODO: If we ever need to validate data or guard against attacks
+	//We could do it here
 }
 
 //Append an error to a div element as a list item one at a time
@@ -61,12 +52,11 @@ LoginController.prototype.loginFormIsValid = function() {
 }
 
 LoginController.prototype.incrementNumberOfLoginAttempts = function() {
-	numberOfLoginAttempts += 1;
-	console.log("incremeent login attempts" + numberOfLoginAttempts);
+	this.numberOfLoginAttempts += 1;
 }
 
 LoginController.prototype.setNumberOfLoginAttempts = function(newNumberOfLoginAttempts) {
-	numberOfLoginAttempts = newNumberOfLoginAttempts;
+	this.numberOfLoginAttempts = newNumberOfLoginAttempts;
 }
 
 LoginController.prototype.retrieveSubmittedUserNameFromDOM = function() {
@@ -81,4 +71,3 @@ $(document).ready(function() {
 	loginController = new LoginController();
 	loginController.init();
 });
-

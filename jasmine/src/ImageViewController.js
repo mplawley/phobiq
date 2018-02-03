@@ -3,7 +3,7 @@ ImageViewController = function() {};
 //Directory on the server where images are stored
 //in subdirectories based on unique username
 ImageViewController.prototype.directoryToGetImagesFrom;
-ImageViewController.prototype.imageHeight = 400;
+ImageViewController.prototype.directoryCheckUrl = "/directory-exists.php";
 ImageViewController.prototype.request;
 
 //The images currently loaded to the Phobiq webpage
@@ -13,17 +13,16 @@ ImageViewController.prototype.loadedImages;
 ImageViewController.prototype.init = function() {
 	this.directoryToGetImagesFrom = folder = "images/" + blurController.getUsername() + "/";
 	this.loadedImages = [];
-	this.getImages();
+
+	//If the user has logged in and uploaded images before, get them now.
+	if (this.directoryExists()) {
+		this.getImages();	
+	}
 }
 
 //Get images from the server
 ImageViewController.prototype.getImages = function() {
 	_this = this;
-
-	//If there is no image directory because the user has not uploaded any images, end...
-	if (!this.directoryExists()) {
-		return;
-	}
 
 	//Otherwise, get the images from the directory based on the user's unique login name.
 	//These are stored in the /images directory on the server
@@ -41,12 +40,23 @@ ImageViewController.prototype.getImages = function() {
 	                _this.animateImageContainerLimitDiv();
 	            } 
 	        });
-	    }
+	    },
+	    error: function(jqXHR, textStatus, errorThrown) {
+			console.error("The following error occurred: " +
+							textStatus, errorThrown, jqXHR
+			);
+		}
 	}); 
 }
 
 ImageViewController.prototype.directoryExists = function() {
-    return true;
+    $.ajax({
+	    type: 'get',
+	    url: this.directoryCheckUrl,
+	    success: function(data) {
+        	return data; //php at directoryCheckUrl echoes true or false
+    	}
+	});
 }
 
 //Animate the resizing of the imageContainer div by animating a container
