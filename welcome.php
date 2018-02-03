@@ -47,7 +47,7 @@
         </div>
 
         <div id="imageContainerLimit">
-            <div id="imageContainer" class="imageToBlur"> </div>
+            <div id="imageContainer"> </div>
         </div>
 
         <p id="instructions">Click above or move the slider to change the blur.</p>
