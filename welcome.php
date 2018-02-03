@@ -47,7 +47,11 @@
         </div>
 
         <div id="imageContainerLimit">
-            <div id="imageContainer"> </div>
+            <div id="imageContainer"> 
+                <iframe width="420" height="315"
+                    src="https://www.youtube.com/embed/tgbNymZ7vqY">
+                </iframe>
+            </div>
         </div>
 
         <p id="instructions">Click above or move the slider to change the blur.</p>
@@ -58,7 +62,17 @@
         </div>
 
         <div id="bottomDiv">
-            <form id="imageDropzone" class="dropzone" name="file" action="/file-upload.php"></form>
+            <form id="imageDropzone" 
+                class="dropzone" 
+                name="file" 
+                action="/file-upload.php">  
+            </form>
+
+            <form action="/video-upload.php" method="post">
+                YouTube video link: <input type="text" name="youtubeVideoLink"><br>
+                <input type="submit" value="Submit">
+            </form>
+
         </div>
 
     </body>
