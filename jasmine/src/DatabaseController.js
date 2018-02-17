@@ -5,7 +5,8 @@
 
 DatabaseController = function() {};
 
-DatabaseController.prototype.request;
+DatabaseController.prototype.request; //The AJAX request
+DatabaseController.prototype.requestStatus; //Whether the AJAX request succeeded
 DatabaseController.prototype.developmentURL = "/dbConnection.php";
 
 DatabaseController.prototype.sendDataWithAjaxCall = function (blurController) {
@@ -31,11 +32,17 @@ DatabaseController.prototype.sendDataWithAjaxCall = function (blurController) {
 		console.log("Request is done: " + response + 
 					" textStatus: " + textStatus + 
 					" jqXHR: " + jqXHR);
+		requestStatus = true;
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
 		console.error("The following error occurred: " +
 						textStatus, errorThrown, jqXHR
 					 );
+		requestStatus = false;
 	});
+}
+
+DatabaseController.prototype.getRequestStatus = function() {
+	return requestStatus;
 }

@@ -1,4 +1,4 @@
-describe("Test BlurController logic", function() {
+describe("BlurController", function() {
   var blurController;
 
   beforeEach(function() {
@@ -83,7 +83,7 @@ describe("Test BlurController logic", function() {
   });
 });
 
-describe("Test BlurController UI interactions", function() {
+describe("BlurController UI interactions", function() {
   var blurController;
 
   beforeEach(function() {
