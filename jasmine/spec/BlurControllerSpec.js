@@ -63,6 +63,10 @@ describe("BlurController", function() {
     blurController.unblur();
 
     var expectedValue = actualCurrentBlur - actualBlurStep;
+    if (expectedValue < 0) {
+      expectedValue = 0;
+    }
+
     expect(blurController.getCurrentBlur()).toEqual(expectedValue);
 	});
 
@@ -147,6 +151,10 @@ describe("UI views", function() {
   });
 
   it("should calculate percentage progress correctly", function() {
+    //Go overboard to demonstrate multiple cases
+    //In demos, replace with iteration and randomization to show the pitfall of aping
+    //the logic of the code-under-test in the unit test when random behavior is introduced...
+
     var numeratorValue1 = 50;
     var denominatorValue1 = 100;
     var expectedValue1 = 50;

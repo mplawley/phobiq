@@ -13,9 +13,9 @@ describe("DatabaseController", function() {
   });
 
   it("can handle a completed AJAX call", function() {
-    databaseController.sendDataWithAjaxCall(blurController);
     spyOn(console, "log");
-
+    databaseController.sendDataWithAjaxCall(blurController);
+    
     expect(jasmine.Ajax.requests.mostRecent().url).toBe("/dbConnection.php");
 
     jasmine.Ajax.requests.mostRecent().respondWith({
@@ -29,9 +29,9 @@ describe("DatabaseController", function() {
   });
 
   it("can handle a failed AJAX call", function() {
-    databaseController.sendDataWithAjaxCall(blurController);
     spyOn(console, "error");
-
+    databaseController.sendDataWithAjaxCall(blurController);
+    
     expect(jasmine.Ajax.requests.mostRecent().url).toBe("/dbConnection.php");
 
     jasmine.Ajax.requests.mostRecent().respondWith({
