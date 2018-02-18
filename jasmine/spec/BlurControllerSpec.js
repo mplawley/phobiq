@@ -1,23 +1,23 @@
-describe("Test BlurController logic", function() {
+describe("BlurController", function() {
   var blurController;
 
   beforeEach(function() {
-    loadFixtures("indexFixture.html");
+    loadFixtures('indexFixture.html');
     blurController = new BlurController();
   });
 
   it("should call initialization methods", function() {
-    spyOn(blurController, "initializeValues");
+    spyOn(blurController, "initializeBlurValues");
     spyOn(blurController, "bindUserInterfaceElements");
     spyOn(blurController, "initializeUserInterfaceValues");
 
     blurController.init();
 
-    expect(blurController.initializeValues).toHaveBeenCalled();
+    expect(blurController.initializeBlurValues).toHaveBeenCalled();
     expect(blurController.bindUserInterfaceElements).toHaveBeenCalled();
     expect(blurController.initializeUserInterfaceValues).toHaveBeenCalled();
 
-    expect(blurController.initializeValues.calls.count()).toEqual(1);
+    expect(blurController.initializeBlurValues.calls.count()).toEqual(1);
     expect(blurController.bindUserInterfaceElements.calls.count()).toEqual(1);
     expect(blurController.initializeUserInterfaceValues.calls.count()).toEqual(1);
   });
@@ -36,7 +36,7 @@ describe("Test BlurController logic", function() {
     spyOn(blurController, "setCurrentBlur");
     spyOn(blurController, "setBlurStep");
     
-    blurController.initializeValues();
+    blurController.initializeBlurValues();
 
     expect(blurController.setMaxBlur).toHaveBeenCalled();
     expect(blurController.setCurrentBlur).toHaveBeenCalled();
@@ -47,6 +47,8 @@ describe("Test BlurController logic", function() {
     var expectedMaxBlur = 100;
     var expectedCurrentBlur = 100;
     var expectedBlurStep = 1;
+
+    blurController.init();
 
     expect(blurController.getMaxBlur()).toEqual(expectedMaxBlur);
     expect(blurController.getCurrentBlur()).toEqual(expectedCurrentBlur);
@@ -61,6 +63,10 @@ describe("Test BlurController logic", function() {
     blurController.unblur();
 
     var expectedValue = actualCurrentBlur - actualBlurStep;
+    if (expectedValue < 0) {
+      expectedValue = 0;
+    }
+
     expect(blurController.getCurrentBlur()).toEqual(expectedValue);
 	});
 
@@ -81,12 +87,12 @@ describe("Test BlurController logic", function() {
   });
 });
 
-describe("Test BlurController UI interactions", function() {
+describe("BlurController UI interactions", function() {
   var blurController;
 
   beforeEach(function() {
     blurController = new BlurController();
-    blurController.initializeValues();
+    blurController.initializeBlurValues();
     blurController.bindUserInterfaceElements();
     blurController.initializeUserInterfaceValues();
   });
@@ -129,7 +135,7 @@ describe("UI views", function() {
 
   beforeEach(function() {
     blurController = new BlurController();
-    blurController.initializeValues();
+    blurController.initializeBlurValues();
     blurController.bindUserInterfaceElements();
     blurController.initializeUserInterfaceValues();
   });
@@ -145,6 +151,10 @@ describe("UI views", function() {
   });
 
   it("should calculate percentage progress correctly", function() {
+    //Go overboard to demonstrate multiple cases
+    //In demos, replace with iteration and randomization to show the pitfall of aping
+    //the logic of the code-under-test in the unit test when random behavior is introduced...
+
     var numeratorValue1 = 50;
     var denominatorValue1 = 100;
     var expectedValue1 = 50;
