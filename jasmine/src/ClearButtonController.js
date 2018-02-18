@@ -34,5 +34,5 @@ ClearButtonController.prototype.handleImageClearButtonClick = function() {
 	imageViewController.loadedImages = [];
 
 	//Clear out the images in the user's directory
-	imageDAO.clearImagesFromDirectory();
+	deleteImageController.clearImagesFromDirectory();
 }

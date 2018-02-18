@@ -12,9 +12,9 @@ $(document).ready(function() {
     blurController = new BlurController(databaseController);
     blurController.init();
 
-    imageDAO = new ImageDAO();
+    deleteImageController = new DeleteImageController();
 
-    clearButtonController = new ClearButtonController(imageDAO);
+    clearButtonController = new ClearButtonController(deleteImageController);
     clearButtonController.init();
 
     imageViewController = new ImageViewController();

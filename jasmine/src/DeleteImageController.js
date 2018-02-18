@@ -1,8 +1,8 @@
-ImageDAO = function() {};
-ImageDAO.prototype.request;
-ImageDAO.prototype.url = "/delete-images.php";
+DeleteImageController = function() {};
+DeleteImageController.prototype.request;
+DeleteImageController.prototype.url = "/delete-images.php";
 
-ImageDAO.prototype.clearImagesFromDirectory = function() {
+DeleteImageController.prototype.clearImagesFromDirectory = function() {
 	//If a request already exists, abort this one.
 	if (this.request) {
 		this.request.abort();

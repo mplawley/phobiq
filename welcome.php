@@ -28,7 +28,7 @@
     <script src="jasmine/src/ClearButtonController.js"></script>
     <script src="jasmine/src/ImageViewController.js"></script>
     <script src="jasmine/src/DropzoneController.js"></script>
-    <script src="jasmine/src/ImageDAO.js"></script>
+    <script src="jasmine/src/DeleteImageController.js"></script>
     <script src="jasmine/src/Main.js"></script>
 
     <title>Phobiq</title>
