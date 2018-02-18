@@ -11,6 +11,8 @@ DatabaseController.prototype.developmentURL = "/dbConnection.php";
 
 DatabaseController.prototype.sendDataWithAjaxCall = function (blurController) {
 	//If a request already exists, abort this one.
+	var _this = this;
+
 	if (this.request) {
 		this.request.abort();
 	}
@@ -29,18 +31,23 @@ DatabaseController.prototype.sendDataWithAjaxCall = function (blurController) {
 
 	//Notifications...
 	request.done(function (response, textStatus, jqXHR) {
+		_this.setRequestStatus(true);
 		console.log("Request is done: " + response + 
 					" textStatus: " + textStatus + 
 					" jqXHR: " + jqXHR);
-		requestStatus = true;
+		
 	});
 
 	request.fail(function (jqXHR, textStatus, errorThrown) {
+		_this.setRequestStatus(false);
 		console.error("The following error occurred: " +
 						textStatus, errorThrown, jqXHR
 					 );
-		requestStatus = false;
 	});
+}
+
+DatabaseController.prototype.setRequestStatus = function(newRequestStatus) {
+	requestStatus = newRequestStatus;
 }
 
 DatabaseController.prototype.getRequestStatus = function() {
