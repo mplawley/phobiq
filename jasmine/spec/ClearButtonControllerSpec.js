@@ -27,11 +27,11 @@ describe("ClearButtonController", function() {
 
   it("should ensure that another controller's methods are called without performing an integration test ", function() {
     spyOn(imageViewController, "animateImageContainerLimitDiv");
-    spyOn(imageDAO, "clearImagesFromDirectory");
+    spyOn(deleteImageController, "clearImagesFromDirectory");
 
     clearButtonController.handleImageClearButtonClick();
 
     expect(imageViewController.animateImageContainerLimitDiv).toHaveBeenCalled();
-    expect(imageDAO.clearImagesFromDirectory).toHaveBeenCalled();
+    expect(deleteImageController.clearImagesFromDirectory).toHaveBeenCalled();
   });
 });
