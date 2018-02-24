@@ -1,6 +1,8 @@
 from splinter import Browser
 from loginTestSuite import *
 from blurTestSuite import *
+import colorama
+from colorama import Fore, Style
 
 ##########################################
 ############## SETUP #####################
@@ -29,5 +31,9 @@ with Browser('chrome') as browser:
 ############## FINISH ####################
 ##########################################
 for key, value in testDictionary.items():
-    print (key, value)
+    if value == "success":
+        print(Fore.BLACK + key, Fore.GREEN + value)
+    else:
+        print (Fore.BLACK + key, Fore.RED + value)
 
+    print(Style.RESET_ALL)
