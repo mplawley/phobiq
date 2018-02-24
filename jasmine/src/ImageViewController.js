@@ -11,20 +11,17 @@ ImageViewController.prototype.loadedImages;
 
 //Init called by Main.js
 ImageViewController.prototype.init = function() {
+	var _this = this;
 	this.directoryToGetImagesFrom = folder = "images/" + blurController.getUsername() + "/";
 	this.loadedImages = [];
-
-	//If the user has logged in and uploaded images before, get them now.
-	if (this.directoryExists()) {
-		this.getImages();	
-	}
+	this.checkThatDirectoryExists();
 }
 
 //Get images from the server
 ImageViewController.prototype.getImages = function() {
 	_this = this;
 
-	//Otherwise, get the images from the directory based on the user's unique login name.
+	//Get the images from the directory based on the user's unique login name.
 	//These are stored in the /images directory on the server
 	$.ajax({
 		url: this.directoryToGetImagesFrom,
@@ -49,14 +46,28 @@ ImageViewController.prototype.getImages = function() {
 	}); 
 }
 
-ImageViewController.prototype.directoryExists = function() {
+ImageViewController.prototype.checkThatDirectoryExists = function() {
+	var _this = this;
+
     $.ajax({
 	    type: 'get',
 	    url: this.directoryCheckUrl,
-	    success: function(data) {
-        	return data; //php at directoryCheckUrl echoes true or false
-    	}
+	    complete: function(data) {
+	    	_this.successCallback(data.responseText); //php returns a data object here
+    	},
+    	error: function(jqXHR, textStatus, errorThrown) {
+			console.error("The following error occurred: " +
+							textStatus, errorThrown, jqXHR
+			);
+		}
 	});
+}
+
+ImageViewController.prototype.successCallback = function(directoryExists) {
+	if (directoryExists === "true") {
+		console.log("directory exists");
+		this.getImages();
+	}
 }
 
 //Animate the resizing of the imageContainer div by animating a container
