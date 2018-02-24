@@ -17,7 +17,7 @@ def loginToTestBlur(browser, urlToVisit):
 ############### TESTS ####################
 ##########################################
 
-def testBlurClicks(browser, urlToVisit):
+def testMultipleBlurClicks(browser, urlToVisit):
 	loginToTestBlur(browser, urlToVisit)
 	imageContainer = browser.find_by_id('imageContainerLimit')
 
@@ -25,6 +25,18 @@ def testBlurClicks(browser, urlToVisit):
 		imageContainer.click()
 
 	if browser.is_text_present('49%'):
+		return "success"
+	else:
+		return "FAILED"
+
+def testMoreThanMaximumNumberOfClicks(browser, urlToVisit):
+	loginToTestBlur(browser, urlToVisit)
+	imageContainer = browser.find_by_id('imageContainerLimit')
+
+	for i in range(0,140):
+		imageContainer.click()
+
+	if browser.is_text_present('100%'):
 		return "success"
 	else:
 		return "FAILED"
